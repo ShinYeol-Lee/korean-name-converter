@@ -242,6 +242,24 @@
             margin: 5px 0;
         }
         
+        .footer-links {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 0.9em;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
         /* 모바일 최적화 */
         @media (max-width: 768px) {
             .container {
@@ -276,6 +294,11 @@
             
             .style-grid {
                 grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-links a {
+                display: block;
+                margin: 8px 0;
             }
         }
         
@@ -404,6 +427,13 @@
             <p>🌟 Convert names from around the world to beautiful Korean!</p>
             <p>🎯 Perfect for K-pop fans, Korean learners, and cultural enthusiasts</p>
             <p>💡 Automatic conversion may not be 100% accurate</p>
+            
+            <div class="footer-links">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="contact.html">Contact</a>
+                <a href="about.html">About</a>
+            </div>
         </div>
     </div>
 
