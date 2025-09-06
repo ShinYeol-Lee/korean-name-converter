@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <title>About Us - Name2Korean</title>
+    <meta name="description" content="Learn about Name2Korean - Our mission to bridge cultures through beautiful Korean name conversions">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&family=Nanum+Myeongjo:wght@400;700&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .nav {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            padding: 10px 20px;
+            border-radius: 25px;
+            background: rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        
+        .nav a:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+        
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin: 20px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            line-height: 1.8;
+        }
+        
+        .card h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 10px;
+        }
+        
+        .card h3 {
+            color: #333;
+            margin: 25px 0 15px 0;
+            font-size: 1.3em;
+        }
+        
+        .card p {
+            margin-bottom: 15px;
+            color: #555;
+        }
+        
+        .card ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        
+        .card li {
+            margin-bottom: 8px;
+            color: #555;
+        }
+        
+        .mission-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .mission-box h3 {
+            color: white;
+            margin-bottom: 15px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .feature-card {
+            background: #f8f9ff;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid #e0e7ff;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+            color: #667eea;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .stat-card {
+            background: #f8f9ff;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border-left: 4px solid #667eea;
+        }
+        
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            color: #555;
+            font-size: 0.9em;
+        }
+        
+        .team-section {
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .team-member {
+            background: #f8f9ff;
+            padding: 25px;
+            border-radius: 15px;
+            max-width: 400px;
+            margin: 20px auto;
+        }
+        
+        .timeline {
+            margin: 30px 0;
+        }
+        
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            gap: 20px;
+        }
+        
+        .timeline-date {
+            background: #667eea;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            min-width: 120px;
+            text-align: center;
+        }
+        
+        .timeline-content {
+            flex: 1;
+            padding: 15px;
+            background: #f8f9ff;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .footer {
+            text-align: center;
+            color: white;
+            opacity: 0.8;
+            margin-top: 50px;
+            padding: 30px;
+        }
+        
+        .footer p {
+            margin: 5px 0;
+        }
+        
+        /* 모바일 최적화 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .header h1 {
+                font-size: 2.5em;
+            }
+            
+            .card {
+                padding: 25px;
+            }
+            
+            .nav a {
+                display: block;
+                margin: 5px 0;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .timeline-item {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>✨ Name2Korean</h1>
+            <p>About Our Service</p>
+        </div>
+
+        <div class="nav">
+            <a href="index.html">🏠 Home</a>
+            <a href="privacy.html">🛡️ Privacy Policy</a>
+            <a href="terms.html">📋 Terms of Service</a>
+            <a href="contact.html">📧 Contact</a>
+            <a href="about.html">ℹ️ About</a>
+        </div>
+
+        <div class="card">
+            <h2>Welcome to Name2Korean</h2>
+            <p>Name2Korean is a free online service that bridges cultures by converting names from around the world into beautiful Korean characters. Whether you're a K-pop enthusiast, a Korean language learner, or someone curious about how your name would look in Korean, we're here to help you discover the beauty of Korean typography.</p>
+            
+            <div class="mission-box">
+                <h3>Our Mission</h3>
+                <p>To celebrate cultural diversity and promote Korean language learning by making Korean name conversion accessible, fun, and educational for everyone around the world.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>What We Offer</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h3>Multi-Language Support</h3>
+                    <p>Convert names from English, Japanese, Chinese, Spanish, and French into Korean characters with phonetic accuracy.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Beautiful Designs</h3>
+                    <p>Choose from 6 stunning visual styles including traditional, modern, and calligraphy options for your Korean name.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Mobile Friendly</h3>
+                    <p>Fully responsive design that works perfectly on smartphones, tablets, and desktop computers.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">💾</div>
+                    <h3>Download & Share</h3>
+                    <p>Save your converted names as high-quality images with customizable backgrounds for social media sharing.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🆓</div>
+                    <h3>Completely Free</h3>
+                    <p>All features are available at no cost. We believe cultural exchange should be accessible to everyone.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Privacy First</h3>
+                    <p>Names are processed in real-time without permanent storage. Your privacy and data security are our priority.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Service Statistics</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">50K+</div>
+                    <div class="stat-label">Names Converted</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">Languages Supported</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">6</div>
+                    <div class="stat-label">Design Styles</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">190+</div>
+                    <div class="stat-label">Countries Reached</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Why Korean Names Matter</h2>
+            <p>Korean names carry deep cultural significance and beautiful meanings. Each character (Hanja) often represents virtues, natural elements, or aspirations that parents wish for their children. By converting your name to Korean, you're not just seeing a transliteration – you're experiencing a connection to one of the world's most artistic writing systems.</p>
+
+            <h3>Cultural Significance</h3>
+            <ul>
+                <li><strong>Hangeul Beauty:</strong> Korean writing system is praised for its scientific design and visual harmony</li>
+                <li><strong>Phonetic Accuracy:</strong> Our conversions respect Korean phonology while maintaining pronounceability</li>
+                <li><strong>Cultural Bridge:</strong> Helps foster understanding and appreciation between different cultures</li>
+                <li><strong>Educational Value:</strong> Introduces users to Korean language structure and sound patterns</li>
+            </ul>
+
+            <h3>Perfect For</h3>
+            <ul>
+                <li>K-pop and K-drama fans wanting to see their names in Korean</li>
+                <li>Korean language learners exploring name conventions</li>
+                <li>People planning to visit or work in Korea</li>
+                <li>Cultural enthusiasts and language lovers</li>
+                <li>Social media content creators and influencers</li>
+                <li>Anyone curious about Korean culture and writing</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>Our Development Journey</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">Sep 2025</div>
+                    <div class="timeline-content">
+                        <strong>Public Launch</strong><br>
+                        Name2Korean goes live with multi-language support and beautiful design options.
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">Aug 2025</div>
+                    <div class="timeline-content">
+                        <strong>Beta Testing</strong><br>
+                        Extensive testing with native Korean speakers to ensure conversion accuracy.
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">Jul 2025</div>
+                    <div class="timeline-content">
+                        <strong>Design System</strong><br>
+                        Development of 6 unique visual styles inspired by Korean typography traditions.
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">Jun 2025</div>
+                    <div class="timeline-content">
+                        <strong>Algorithm Development</strong><br>
+                        Creation of phonetic conversion algorithms for multiple source languages.
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">May 2025</div>
+                    <div class="timeline-content">
+                        <strong>Project Inception</strong><br>
+                        Initial concept development driven by the global popularity of Korean culture.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="team-section">
+                <h2>Behind the Project</h2>
+                <div class="team-member">
+                    <h3>Development Team</h3>
+                    <p>A passionate group of developers, designers, and Korean culture enthusiasts dedicated to creating meaningful cultural bridges through technology. Our team combines expertise in linguistics, web development, and Korean cultural studies.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Technical Details</h2>
+            <h3>Conversion Methodology</h3>
+            <p>Our name conversion process uses advanced phonetic mapping algorithms that:</p>
+            <ul>
+                <li>Analyze source language pronunciation patterns</li>
+                <li>Map sounds to closest Korean phonetic equivalents</li>
+                <li>Consider Korean language constraints and preferences</li>
+                <li>Maintain readability and aesthetic appeal</li>
+            </ul>
+
+            <h3>Accuracy & Limitations</h3>
+            <p>While we strive for accuracy, please note that:</p>
+            <ul>
+                <li>Conversions are phonetic approximations, not official transliterations</li>
+                <li>Some sounds don't have direct Korean equivalents</li>
+                <li>Regional accent variations may affect results</li>
+                <li>Results are intended for entertainment and educational purposes</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>Future Plans</h2>
+            <p>We're constantly working to improve Name2Korean with exciting features in development:</p>
+            <ul>
+                <li>Additional source languages (Arabic, Hindi, Russian)</li>
+                <li>Audio pronunciation guides</li>
+                <li>Historical Korean script options</li>
+                <li>Meaning explanations for converted characters</li>
+                <li>API access for developers</li>
+                <li>Mobile app versions</li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            <p>🌟 Convert names from around the world to beautiful Korean!</p>
+            <p>🎯 Perfect for K-pop fans, Korean learners, and cultural enthusiasts</p>
+            <p>© 2025 Name2Korean. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>

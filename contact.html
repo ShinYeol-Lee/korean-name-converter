@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <title>Contact Us - Name2Korean</title>
+    <meta name="description" content="Contact Name2Korean - Get in touch with us for support, feedback, or inquiries about our name conversion service">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&family=Nanum+Myeongjo:wght@400;700&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .nav {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            padding: 10px 20px;
+            border-radius: 25px;
+            background: rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        
+        .nav a:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+        
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin: 20px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            line-height: 1.8;
+        }
+        
+        .card h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 10px;
+        }
+        
+        .card h3 {
+            color: #333;
+            margin: 25px 0 15px 0;
+            font-size: 1.3em;
+        }
+        
+        .card p {
+            margin-bottom: 15px;
+            color: #555;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .contact-card {
+            background: #f8f9ff;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid #e0e7ff;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.1);
+        }
+        
+        .contact-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+            color: #667eea;
+        }
+        
+        .contact-card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+        
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.2s;
+            font-family: inherit;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+            width: 100%;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .faq-section {
+            margin-top: 40px;
+        }
+        
+        .faq-item {
+            background: #f8f9ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .faq-question {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .faq-answer {
+            color: #555;
+        }
+        
+        .footer {
+            text-align: center;
+            color: white;
+            opacity: 0.8;
+            margin-top: 50px;
+            padding: 30px;
+        }
+        
+        .footer p {
+            margin: 5px 0;
+        }
+        
+        /* 모바일 최적화 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .header h1 {
+                font-size: 2.5em;
+            }
+            
+            .card {
+                padding: 25px;
+            }
+            
+            .nav a {
+                display: block;
+                margin: 5px 0;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>✨ Name2Korean</h1>
+            <p>Contact Us</p>
+        </div>
+
+        <div class="nav">
+            <a href="index.html">🏠 Home</a>
+            <a href="privacy.html">🛡️ Privacy Policy</a>
+            <a href="terms.html">📋 Terms of Service</a>
+            <a href="contact.html">📧 Contact</a>
+            <a href="about.html">ℹ️ About</a>
+        </div>
+
+        <div class="card">
+            <h2>Get in Touch</h2>
+            <p>We'd love to hear from you! Whether you have questions, feedback, or need support, we're here to help.</p>
+
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">📧</div>
+                    <h3>Email Support</h3>
+                    <p>For general inquiries and support</p>
+                    <p><strong>name2korean@gmail.com</strong></p>
+                    <p>Response time: 24-48 hours</p>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-icon">🛡️</div>
+                    <h3>Privacy & Legal</h3>
+                    <p>For privacy and legal matters</p>
+                    <p><strong>legal@name2korean.com</strong></p>
+                    <p>Response time: 3-5 business days</p>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-icon">💡</div>
+                    <h3>Feature Requests</h3>
+                    <p>Suggest new features or improvements</p>
+                    <p><strong>feedback@name2korean.com</strong></p>
+                    <p>We read every suggestion!</p>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-icon">🌐</div>
+                    <h3>Business Inquiries</h3>
+                    <p>Partnerships and collaborations</p>
+                    <p><strong>business@name2korean.com</strong></p>
+                    <p>Let's work together!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Send us a Message</h2>
+            <div class="contact-form">
+                <form action="#" method="post" onsubmit="handleFormSubmit(event)">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <select id="subject" name="subject" required>
+                            <option value="">Please select a topic</option>
+                            <option value="general">General Inquiry</option>
+                            <option value="support">Technical Support</option>
+                            <option value="feedback">Feedback & Suggestions</option>
+                            <option value="bug">Bug Report</option>
+                            <option value="business">Business Inquiry</option>
+                            <option value="privacy">Privacy Concern</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" placeholder="Please describe your inquiry in detail..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="faq-section">
+                <h2>Frequently Asked Questions</h2>
+
+                <div class="faq-item">
+                    <div class="faq-question">How accurate are the Korean name conversions?</div>
+                    <div class="faq-answer">Our conversions are based on phonetic approximations and may not be 100% accurate. Korean transliteration can vary based on regional dialects and personal preferences. The results are intended for entertainment and educational purposes.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Can I use the converted names commercially?</div>
+                    <div class="faq-answer">The converted names themselves are phonetic transliterations and can be used freely. However, please check our Terms of Service for specific usage guidelines regarding our service and generated images.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Why isn't my name converting correctly?</div>
+                    <div class="faq-answer">Some names may not have direct Korean equivalents or may require manual adjustment. If you're experiencing issues, please contact our support team with the specific name and we'll help improve our conversion system.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Do you store the names I convert?</div>
+                    <div class="faq-answer">Names are processed in real-time and are not permanently stored on our servers. Please refer to our Privacy Policy for complete information about data handling.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Can you add more languages or styles?</div>
+                    <div class="faq-answer">We're always working to improve our service! Send us your suggestions at feedback@name2korean.com and we'll consider them for future updates.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Is the service really free?</div>
+                    <div class="faq-answer">Yes! Name2Korean is completely free to use. We may display advertisements to support the service, but all core features remain free for everyone.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>🌟 Convert names from around the world to beautiful Korean!</p>
+            <p>🎯 Perfect for K-pop fans, Korean learners, and cultural enthusiasts</p>
+            <p>© 2025 Name2Korean. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script>
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            
+            // Form validation
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value.trim();
+
+            if (!name || !email || !subject || !message) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+
+            // Simulate form submission
+            alert('Thank you for your message! We will get back to you within 24-48 hours.');
+            
+            // Reset form
+            event.target.reset();
+        }
+    </script>
+</body>
+</html>
