@@ -8,9 +8,6 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <title>Name2Korean - 다국어 한글 변환기</title>
     <meta name="description" content="세계 각국의 이름을 아름다운 한글로 변환하고 다운로드하세요. 영어, 일본어, 중국어, 스페인어, 프랑스어 지원">
-
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6284901806810396"
-     crossorigin="anonymous"></script>
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&family=Nanum+Myeongjo:wght@400;700&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
@@ -58,6 +55,127 @@
             padding: 30px;
             margin: 20px 0;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        /* 예시 섹션 스타일 - 수정됨 */
+        .examples-section {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            backdrop-filter: blur(10px);
+        }
+        
+        .examples-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        .examples-scroll {
+            position: relative;
+            height: 120px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+        
+        .example-card {
+            position: absolute;
+            min-width: 280px;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            opacity: 0;
+            animation: moveRight 25s linear infinite;
+            border-left: 4px solid;
+        }
+        
+        /* 각 카드별 파스텔 색상 */
+        .example-card:nth-child(1) { 
+            background: linear-gradient(135deg, #ffeef8 0%, #ffe0f0 100%);
+            border-left-color: #ff9dbf;
+            animation-delay: 0s;
+        }
+        .example-card:nth-child(2) { 
+            background: linear-gradient(135deg, #e8f4ff 0%, #d1e9ff 100%);
+            border-left-color: #7bb3ff;
+            animation-delay: 4s;
+        }
+        .example-card:nth-child(3) { 
+            background: linear-gradient(135deg, #fff4e6 0%, #ffe8cc 100%);
+            border-left-color: #ffb366;
+            animation-delay: 8s;
+        }
+        .example-card:nth-child(4) { 
+            background: linear-gradient(135deg, #f0fff4 0%, #e6ffe9 100%);
+            border-left-color: #66cc7a;
+            animation-delay: 12s;
+        }
+        .example-card:nth-child(5) { 
+            background: linear-gradient(135deg, #f9f0ff 0%, #f0e1ff 100%);
+            border-left-color: #b366ff;
+            animation-delay: 16s;
+        }
+        .example-card:nth-child(6) { 
+            background: linear-gradient(135deg, #fff9e6 0%, #fff2cc 100%);
+            border-left-color: #ffcc66;
+            animation-delay: 20s;
+        }
+        .example-card:nth-child(7) { 
+            background: linear-gradient(135deg, #ffe6f2 0%, #ffcce6 100%);
+            border-left-color: #ff66b3;
+            animation-delay: 24s;
+        }
+        .example-card:nth-child(8) { 
+            background: linear-gradient(135deg, #e6f9ff 0%, #ccf2ff 100%);
+            border-left-color: #66d9ff;
+            animation-delay: 28s;
+        }
+        .example-card:nth-child(9) { 
+            background: linear-gradient(135deg, #f2ffe6 0%, #e6ffcc 100%);
+            border-left-color: #7aff66;
+            animation-delay: 32s;
+        }
+        .example-card:nth-child(10) { 
+            background: linear-gradient(135deg, #fff0e6 0%, #ffe1cc 100%);
+            border-left-color: #ff9966;
+            animation-delay: 36s;
+        }
+        
+        .example-original {
+            font-size: 13px;
+            color: #444;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .example-korean {
+            font-size: 15px;
+            font-weight: bold;
+            color: #2d3748;
+        }
+        
+        /* 수정된 애니메이션 - 더 부드럽게 */
+        @keyframes moveRight {
+            0% {
+                transform: translateX(-320px);
+                opacity: 0;
+            }
+            3% {
+                opacity: 1;
+            }
+            97% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(calc(100vw + 100px));
+                opacity: 0;
+            }
         }
         
         .language-grid {
@@ -303,6 +421,11 @@
                 display: block;
                 margin: 8px 0;
             }
+            
+            .example-card {
+                min-width: 250px;
+                animation: moveRight 15s linear infinite;
+            }
         }
         
         @media (max-width: 480px) {
@@ -317,6 +440,15 @@
             .language-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .example-card {
+                min-width: 200px;
+                animation: moveRight 12s linear infinite;
+            }
+            
+            .examples-section {
+                padding: 20px;
+            }
         }
     </style>
 </head>
@@ -325,6 +457,68 @@
         <div class="header">
             <h1>✨ Name2Korean</h1>
             <p>세계 각국의 이름을 아름다운 한글로 변환하세요</p>
+            
+            <div style="margin-top: 20px;">
+                <a href="learn-korean.html" style="display: inline-block; background: rgba(255,255,255,0.2); color: white; text-decoration: none; padding: 12px 24px; border-radius: 25px; transition: all 0.3s ease; font-size: 16px;">
+                    📚 Learn About Korean Alphabet
+                </a>
+            </div>
+        </div>
+
+        <!-- 예시 갤러리 -->
+        <div class="examples-section">
+            <div class="examples-title">See how names transform into Korean</div>
+            <div class="examples-scroll">
+                <!-- 영어 예시 -->
+                <div class="example-card">
+                    <div class="example-original">My name is John.</div>
+                    <div class="example-korean">My Korean name is 존!</div>
+                </div>
+                <div class="example-card">
+                    <div class="example-original">My name is Sarah.</div>
+                    <div class="example-korean">My Korean name is 사라!</div>
+                </div>
+                
+                <!-- 일본어 예시 -->
+                <div class="example-card">
+                    <div class="example-original">私の名前はたけしです。</div>
+                    <div class="example-korean">韓国名は 타케시 です!</div>
+                </div>
+                <div class="example-card">
+                    <div class="example-original">私の名前はゆきです。</div>
+                    <div class="example-korean">韓国名は 유키 です!</div>
+                </div>
+                
+                <!-- 중국어 예시 -->
+                <div class="example-card">
+                    <div class="example-original">我的名字是王明。</div>
+                    <div class="example-korean">我的韩文名字는 왕밍!</div>
+                </div>
+                <div class="example-card">
+                    <div class="example-original">我的名字是李华。</div>
+                    <div class="example-korean">我的韩文名字는 리화!</div>
+                </div>
+                
+                <!-- 스페인어 예시 -->
+                <div class="example-card">
+                    <div class="example-original">Mi nombre es Carlos.</div>
+                    <div class="example-korean">Mi nombre coreano es 카를로스!</div>
+                </div>
+                <div class="example-card">
+                    <div class="example-original">Mi nombre es María.</div>
+                    <div class="example-korean">Mi nombre coreano es 마리아!</div>
+                </div>
+                
+                <!-- 프랑스어 예시 -->
+                <div class="example-card">
+                    <div class="example-original">Je m'appelle Pierre.</div>
+                    <div class="example-korean">Mon nom coréen est 피에르!</div>
+                </div>
+                <div class="example-card">
+                    <div class="example-original">Je m'appelle Marie.</div>
+                    <div class="example-korean">Mon nom coréen est 마리!</div>
+                </div>
+            </div>
         </div>
 
         <!-- 언어 선택 -->
@@ -685,9 +879,10 @@
             link.click();
         }
 
-        // 초기 설정
-        updateInputPlaceholder();
+        // 페이지 로드 시 초기화
+        document.addEventListener('DOMContentLoaded', function() {
+            updateInputPlaceholder();
+        });
     </script>
 </body>
 </html>
-
