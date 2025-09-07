@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <title>Learn About Korean - Name2Korean</title>
+    <meta name="description" content="Discover the fascinating history and science behind the Korean alphabet (Hangeul). Learn how Korean characters work and why they're perfect for name conversion.">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&family=Nanum+Myeongjo:wght@400;700&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .nav {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            padding: 10px 20px;
+            border-radius: 25px;
+            background: rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        
+        .nav a:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+        
+        .language-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .language-tab {
+            padding: 12px 24px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+        
+        .language-tab.active {
+            background: white;
+            color: #667eea;
+            font-weight: bold;
+        }
+        
+        .language-tab:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin: 20px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            line-height: 1.8;
+        }
+        
+        .content-section {
+            display: none;
+        }
+        
+        .content-section.active {
+            display: block;
+        }
+        
+        .content-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 10px;
+        }
+        
+        .content-section h3 {
+            color: #333;
+            margin: 25px 0 15px 0;
+            font-size: 1.3em;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            color: #555;
+        }
+        
+        .content-section ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        
+        .content-section li {
+            margin-bottom: 8px;
+            color: #555;
+        }
+        
+        .korean-demo {
+            background: #f8f9ff;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 20px 0;
+            font-size: 1.5em;
+            font-family: 'Nanum Myeongjo', serif;
+        }
+        
+        .highlight-box {
+            background: #e8f4fd;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            margin: 20px 0;
+        }
+        
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+        
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            gap: 20px;
+        }
+        
+        .timeline-date {
+            background: #667eea;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            min-width: 120px;
+            text-align: center;
+        }
+        
+        .timeline-content {
+            flex: 1;
+            padding: 15px;
+            background: #f8f9ff;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .footer {
+            text-align: center;
+            color: white;
+            opacity: 0.8;
+            margin-top: 50px;
+            padding: 30px;
+        }
+        
+        .footer p {
+            margin: 5px 0;
+        }
+        
+        .footer-links {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 0.9em;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        /* 모바일 최적화 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .header h1 {
+                font-size: 2.5em;
+            }
+            
+            .card {
+                padding: 25px;
+            }
+            
+            .nav a {
+                display: block;
+                margin: 5px 0;
+            }
+            
+            .language-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .timeline-item {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>✨ Name2Korean</h1>
+            <p>Learn About the Korean Alphabet</p>
+        </div>
+
+        <div class="nav">
+            <a href="index.html">🏠 Back to Name Converter</a>
+        </div>
+
+        <div class="language-tabs">
+            <button class="language-tab active" onclick="showLanguage('english')">English</button>
+            <button class="language-tab" onclick="showLanguage('japanese')">日本語</button>
+            <button class="language-tab" onclick="showLanguage('chinese')">中文</button>
+            <button class="language-tab" onclick="showLanguage('spanish')">Español</button>
+            <button class="language-tab" onclick="showLanguage('french')">Français</button>
+        </div>
+
+        <div class="card">
+            <!-- English Content -->
+            <div id="english" class="content-section active">
+                <h2>Introduction to Hangeul: Korea's Scientific Writing System</h2>
+                
+                <div class="korean-demo">
+                    한글 (Hangeul) - Korea's Scientific Writing System
+                </div>
+
+                <h3>What is Hangeul?</h3>
+                <p>Hangeul (한글) is the unique writing system of the Korean language, created in 1443 by King Sejong the Great of the Joseon Dynasty. Originally called "Hunminjeongeum" (훈민정음), meaning "correct sounds for instructing the people," it was officially promulgated in 1446. The name "Hangeul" was coined in the 1910s by linguist Ju Si-gyeong.</p>
+
+                <h3>Why Was Hangeul Created?</h3>
+                <p>King Sejong observed that ordinary people suffered because they couldn't read or write Chinese characters, which were extremely difficult to learn. At that time, Korea used Chinese characters to write, but these didn't properly represent Korean sounds and grammar. This created a barrier between the educated elite and common people.</p>
+                
+                <p>King Sejong's goals were to:</p>
+                <ul>
+                    <li>Enable all people to express their thoughts in writing</li>
+                    <li>Create a writing system that accurately represents Korean sounds</li>
+                    <li>Eliminate the communication gap between social classes</li>
+                    <li>Give Korea its own cultural identity through a native script</li>
+                </ul>
+
+                <h3>The Scientific Design of Hangeul</h3>
+                
+                <h4>Consonants: Based on Speech Organs</h4>
+                <p>Hangeul consonants are designed to visually represent the shape of the speech organs used to produce each sound:</p>
+                <ul>
+                    <li><strong>ㄱ (g/k):</strong> Shape of the tongue blocking the throat</li>
+                    <li><strong>ㄴ (n):</strong> Shape of the tongue touching the upper gum</li>
+                    <li><strong>ㅁ (m):</strong> Shape of closed lips</li>
+                    <li><strong>ㅅ (s):</strong> Shape of teeth</li>
+                    <li><strong>ㅇ (ng):</strong> Shape of the throat</li>
+                </ul>
+
+                <h4>The "Adding Strokes" Principle</h4>
+                <p>Hangeul uses a systematic approach where basic consonants can be modified by adding strokes to represent stronger sounds:</p>
+                <ul>
+                    <li>ㄱ → ㅋ (adding aspiration)</li>
+                    <li>ㄷ → ㅌ (adding aspiration)</li>
+                    <li>ㅂ → ㅍ (adding aspiration)</li>
+                </ul>
+
+                <h4>Vowels: Based on Philosophy</h4>
+                <p>Vowels are based on the traditional East Asian philosophy of heaven, earth, and humanity:</p>
+                <ul>
+                    <li><strong>ㆍ (dot):</strong> Heaven</li>
+                    <li><strong>ㅡ (horizontal line):</strong> Earth</li>
+                    <li><strong>ㅣ (vertical line):</strong> Humanity</li>
+                </ul>
+                <p>Other vowels are created by combining these basic elements.</p>
+
+                <h3>Unique Features of Hangeul</h3>
+                <ul>
+                    <li><strong>Phonemic Accuracy:</strong> Nearly perfect correspondence between letters and sounds</li>
+                    <li><strong>Block Writing System:</strong> Consonants and vowels combine into syllable blocks</li>
+                    <li><strong>Easy to Learn:</strong> "A wise person can learn it in a morning, and even a foolish person can learn it in ten days"</li>
+                    <li><strong>Systematic Structure:</strong> Just 24 basic letters can represent all Korean sounds</li>
+                </ul>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">1443</div>
+                        <div class="timeline-content">
+                            <strong>Creation of Hangeul</strong><br>
+                            King Sejong creates the Korean alphabet to improve literacy among common people.
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">1962</div>
+                        <div class="timeline-content">
+                            <strong>National Treasure</strong><br>
+                            Hangeul is designated as Korean National Treasure.
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">1997</div>
+                        <div class="timeline-content">
+                            <strong>UNESCO Recognition</strong><br>
+                            Hunminjeongeum manuscript inscribed in UNESCO Memory of the World Register.
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Hangeul in the Digital Age</h3>
+                <p>Hangeul's systematic design makes it particularly well-suited for digital technology:</p>
+                <ul>
+                    <li>Efficient for computer input methods</li>
+                    <li>Excellent for voice recognition software</li>
+                    <li>Compact data storage</li>
+                    <li>Easy to process for artificial intelligence</li>
+                </ul>
+
+                <div class="highlight-box">
+                    <strong>Modern Impact:</strong> Hangeul stands as a remarkable achievement in human communication—a writing system that successfully combines scientific precision with philosophical depth, proving that thoughtful design principles can create solutions that last for centuries.
+                </div>
+            </div>
+
+            <!-- Japanese Content -->
+            <div id="japanese" class="content-section">
+                <h2>韓国語のアルファベット（한글）について学ぼう</h2>
+                
+                <div class="korean-demo">
+                    한글 (ハングル) - 韓国語のアルファベット
+                </div>
+
+                <h3>🏛️ 歴史</h3>
+                <p><strong>ハングル</strong>（한글）は、1443年に朝鮮王朝の世宗大王によって創制されました。元々は<strong>訓民正音</strong>（훈민정음）と呼ばれ、「民を教える正しい音」という意味で、誰でも簡単に学習できるように設計されました。</p>
+
+                <h3>🔬 科学的設計</h3>
+                <p>ハングルは世界で最も科学的な文字体系の一つとされています：</p>
+                <ul>
+                    <li><strong>表音文字：</strong>各文字が特定の音を表現</li>
+                    <li><strong>解剖学的基礎：</strong>子音の形は発音器官の位置に基づく</li>
+                    <li><strong>哲学的概念：</strong>母音は天・地・人を表現</li>
+                    <li><strong>体系的構造：</strong>文字が規則的に音節ブロックを形成</li>
+                </ul>
+
+                <div class="highlight-box">
+                    <strong>ご存知でしたか？</strong>基本文字わずか24個（子音14個、母音10個）で、11,172個の音節組み合わせが可能です！
+                </div>
+
+                <h3>📝 名前変換の仕組み</h3>
+                <p>お名前を韓国語に変換する際は、音韻近似法を使用します：</p>
+                <ul>
+                    <li>元の名前の音を分析</li>
+                    <li>最も近い韓国語の音を見つける</li>
+                    <li>韓国語文字を組み合わせてその音を再現</li>
+                    <li>発音を維持しながら韓国文字で表現</li>
+                </ul>
+            </div>
+
+            <!-- Chinese Content -->
+            <div id="chinese" class="content-section">
+                <h2>了解韩文字母（한글）</h2>
+                
+                <div class="korean-demo">
+                    한글 (韩文) - 韩国字母
+                </div>
+
+                <h3>🏛️ 历史背景</h3>
+                <p><strong>韩文</strong>（한글）是1443年由朝鲜王朝世宗大王创制的。原名<strong>训民正音</strong>（훈민정음），意为"教导百姓的正确发音"，旨在让普通民众也能轻松学习使用。</p>
+
+                <h3>🔬 科学设计</h3>
+                <p>韩文被认为是世界上最科学的文字系统之一：</p>
+                <ul>
+                    <li><strong>表音文字：</strong>每个字母代表特定发音</li>
+                    <li><strong>解剖学基础：</strong>辅音形状基于发音器官位置</li>
+                    <li><strong>哲学理念：</strong>元音代表天、地、人</li>
+                    <li><strong>系统结构：</strong>字母规则性地组合成音节块</li>
+                </ul>
+
+                <div class="highlight-box">
+                    <strong>您知道吗？</strong>仅用24个基本字母（14个辅音和10个元音），韩文就能创造11,172种音节组合！
+                </div>
+
+                <h3>📝 姓名转换原理</h3>
+                <p>将您的姓名转换为韩文时，我们使用语音近似法：</p>
+                <ul>
+                    <li>分析原姓名中的发音</li>
+                    <li>找到最接近的韩语发音</li>
+                    <li>组合韩文字母重现这些发音</li>
+                    <li>在保持发音的同时使用韩文字符表达</li>
+                </ul>
+            </div>
+
+            <!-- Spanish Content -->
+            <div id="spanish" class="content-section">
+                <h2>Descubre el Alfabeto Coreano (한글)</h2>
+                
+                <div class="korean-demo">
+                    한글 (Hangeul) - El Alfabeto Coreano
+                </div>
+
+                <h3>🏛️ Historia</h3>
+                <p>El alfabeto coreano, conocido como <strong>Hangeul</strong> (한글), fue creado en 1443 por el Rey Sejong el Grande de la Dinastía Joseon. Originalmente llamado <strong>Hunminjeongeum</strong> (훈민정음), que significa "sonidos correctos para instruir al pueblo", fue diseñado para ser fácil de aprender y usar.</p>
+
+                <h3>🔬 Diseño Científico</h3>
+                <p>El Hangeul es considerado uno de los sistemas de escritura más científicos del mundo:</p>
+                <ul>
+                    <li><strong>Principios fonéticos:</strong> Cada letra representa un sonido específico</li>
+                    <li><strong>Base anatómica:</strong> Las formas de las consonantes se basan en la posición de los órganos del habla</li>
+                    <li><strong>Conceptos filosóficos:</strong> Las vocales representan el cielo, la tierra y la humanidad</li>
+                    <li><strong>Estructura sistemática:</strong> Las letras se combinan en bloques silábicos predecibles</li>
+                </ul>
+
+                <div class="highlight-box">
+                    <strong>¿Sabías que?</strong> ¡Con solo 24 letras básicas (14 consonantes y 10 vocales), el Hangeul puede crear 11,172 combinaciones silábicas posibles!
+                </div>
+
+                <h3>📝 Cómo Funciona la Conversión de Nombres</h3>
+                <p>Cuando convertimos tu nombre al coreano, usamos aproximación fonética:</p>
+                <ul>
+                    <li>Analizamos los sonidos en tu nombre original</li>
+                    <li>Encontramos los sonidos coreanos más cercanos</li>
+                    <li>Combinamos letras coreanas para recrear esos sonidos</li>
+                    <li>El resultado mantiene la pronunciación usando caracteres coreanos</li>
+                </ul>
+            </div>
+
+            <!-- French Content -->
+            <div id="french" class="content-section">
+                <h2>Découvrez l'Alphabet Coréen (한글)</h2>
+                
+                <div class="korean-demo">
+                    한글 (Hangeul) - L'Alphabet Coréen
+                </div>
+
+                <h3>🏛️ Histoire</h3>
+                <p>L'alphabet coréen, connu sous le nom de <strong>Hangeul</strong> (한글), a été créé en 1443 par le Roi Sejong le Grand de la Dynastie Joseon. Originellement appelé <strong>Hunminjeongeum</strong> (훈민정음), signifiant "sons corrects pour instruire le peuple", il a été conçu pour être facile à apprendre et à utiliser.</p>
+
+                <h3>🔬 Conception Scientifique</h3>
+                <p>Le Hangeul est considéré comme l'un des systèmes d'écriture les plus scientifiques au monde :</p>
+                <ul>
+                    <li><strong>Principes phonétiques :</strong> Chaque lettre représente un son spécifique</li>
+                    <li><strong>Base anatomique :</strong> Les formes des consonnes sont basées sur la position des organes de la parole</li>
+                    <li><strong>Concepts philosophiques :</strong> Les voyelles représentent le ciel, la terre et l'humanité</li>
+                    <li><strong>Structure systématique :</strong> Les lettres se combinent en blocs syllabiques prévisibles</li>
+                </ul>
+
+                <div class="highlight-box">
+                    <strong>Le saviez-vous ?</strong> Avec seulement 24 lettres de base (14 consonnes et 10 voyelles), le Hangeul peut créer 11,172 combinaisons syllabiques possibles !
+                </div>
+
+                <h3>📝 Comment Fonctionne la Conversion de Noms</h3>
+                <p>Quand nous convertissons votre nom en coréen, nous utilisons l'approximation phonétique :</p>
+                <ul>
+                    <li>Nous analysons les sons dans votre nom original</li>
+                    <li>Nous trouvons les sons coréens les plus proches</li>
+                    <li>Nous combinons les lettres coréennes pour recréer ces sons</li>
+                    <li>Le résultat maintient la prononciation en utilisant des caractères coréens</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>🌟 Convert names from around the world to beautiful Korean!</p>
+            <p>🎯 Perfect for K-pop fans, Korean learners, and cultural enthusiasts</p>
+            <p>💡 Learn more about Korean language and culture</p>
+            
+            <div class="footer-links">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="contact.html">Contact</a>
+                <a href="about.html">About</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showLanguage(language) {
+            // Hide all content sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.language-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected content section
+            document.getElementById(language).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
