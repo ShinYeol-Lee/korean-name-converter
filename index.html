@@ -57,127 +57,7 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
         
-        /* 예시 섹션 스타일 - 수정됨 */
-        .examples-section {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 30px;
-            margin: 20px 0;
-            backdrop-filter: blur(10px);
-        }
-        
-        .examples-title {
-            font-size: 1.5em;
-            font-weight: bold;
-            color: white;
-            text-align: center;
-            margin-bottom: 15px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-        }
-        
-        .examples-scroll {
-            position: relative;
-            height: 120px;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-        }
-        
-        .example-card {
-            position: absolute;
-            min-width: 280px;
-            border-radius: 10px;
-            padding: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            text-align: center;
-            opacity: 0;
-            animation: moveRight 25s linear infinite;
-            border-left: 4px solid;
-        }
-        
-        /* 각 카드별 파스텔 색상 */
-        .example-card:nth-child(1) { 
-            background: linear-gradient(135deg, #ffeef8 0%, #ffe0f0 100%);
-            border-left-color: #ff9dbf;
-            animation-delay: 0s;
-        }
-        .example-card:nth-child(2) { 
-            background: linear-gradient(135deg, #e8f4ff 0%, #d1e9ff 100%);
-            border-left-color: #7bb3ff;
-            animation-delay: 4s;
-        }
-        .example-card:nth-child(3) { 
-            background: linear-gradient(135deg, #fff4e6 0%, #ffe8cc 100%);
-            border-left-color: #ffb366;
-            animation-delay: 8s;
-        }
-        .example-card:nth-child(4) { 
-            background: linear-gradient(135deg, #f0fff4 0%, #e6ffe9 100%);
-            border-left-color: #66cc7a;
-            animation-delay: 12s;
-        }
-        .example-card:nth-child(5) { 
-            background: linear-gradient(135deg, #f9f0ff 0%, #f0e1ff 100%);
-            border-left-color: #b366ff;
-            animation-delay: 16s;
-        }
-        .example-card:nth-child(6) { 
-            background: linear-gradient(135deg, #fff9e6 0%, #fff2cc 100%);
-            border-left-color: #ffcc66;
-            animation-delay: 20s;
-        }
-        .example-card:nth-child(7) { 
-            background: linear-gradient(135deg, #ffe6f2 0%, #ffcce6 100%);
-            border-left-color: #ff66b3;
-            animation-delay: 24s;
-        }
-        .example-card:nth-child(8) { 
-            background: linear-gradient(135deg, #e6f9ff 0%, #ccf2ff 100%);
-            border-left-color: #66d9ff;
-            animation-delay: 28s;
-        }
-        .example-card:nth-child(9) { 
-            background: linear-gradient(135deg, #f2ffe6 0%, #e6ffcc 100%);
-            border-left-color: #7aff66;
-            animation-delay: 32s;
-        }
-        .example-card:nth-child(10) { 
-            background: linear-gradient(135deg, #fff0e6 0%, #ffe1cc 100%);
-            border-left-color: #ff9966;
-            animation-delay: 36s;
-        }
-        
-        .example-original {
-            font-size: 13px;
-            color: #444;
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-        
-        .example-korean {
-            font-size: 15px;
-            font-weight: bold;
-            color: #2d3748;
-        }
-        
-        /* 수정된 애니메이션 - 더 부드럽게 */
-        @keyframes moveRight {
-            0% {
-                transform: translateX(-320px);
-                opacity: 0;
-            }
-            3% {
-                opacity: 1;
-            }
-            97% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateX(calc(100vw + 100px));
-                opacity: 0;
-            }
-        }
-        
+        /* 언어 선택 */
         .language-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -210,6 +90,113 @@
             margin-bottom: 8px;
         }
         
+        /* 샘플 카드 갤러리 */
+        .examples-section {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+        }
+        
+        .examples-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        .examples-scroll {
+            position: relative;
+            height: 120px;
+            overflow: hidden;
+        }
+        
+        .examples-strip {
+            display: flex;
+            gap: 30px;
+            animation: slideLeft 80s linear infinite;
+            width: fit-content;
+        }
+        
+        .example-card {
+            min-width: 280px;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            border-left: 4px solid;
+            flex-shrink: 0;
+        }
+        
+        /* 10개 카드 각각 다른 스타일 */
+        .example-card:nth-child(1) { 
+            background: linear-gradient(135deg, #ffeef8 0%, #ffe0f0 100%);
+            border-left-color: #ff9dbf;
+        }
+        .example-card:nth-child(2) { 
+            background: linear-gradient(135deg, #e8f4ff 0%, #d1e9ff 100%);
+            border-left-color: #7bb3ff;
+        }
+        .example-card:nth-child(3) { 
+            background: linear-gradient(135deg, #fff4e6 0%, #ffe8cc 100%);
+            border-left-color: #ffb366;
+        }
+        .example-card:nth-child(4) { 
+            background: linear-gradient(135deg, #f0fff4 0%, #e6ffe9 100%);
+            border-left-color: #66cc7a;
+        }
+        .example-card:nth-child(5) { 
+            background: linear-gradient(135deg, #f9f0ff 0%, #f0e1ff 100%);
+            border-left-color: #b366ff;
+        }
+        .example-card:nth-child(6) { 
+            background: linear-gradient(135deg, #fff9e6 0%, #fff2cc 100%);
+            border-left-color: #ffcc66;
+        }
+        .example-card:nth-child(7) { 
+            background: linear-gradient(135deg, #ffe6f2 0%, #ffcce6 100%);
+            border-left-color: #ff66b3;
+        }
+        .example-card:nth-child(8) { 
+            background: linear-gradient(135deg, #e6f9ff 0%, #ccf2ff 100%);
+            border-left-color: #66d9ff;
+        }
+        .example-card:nth-child(9) { 
+            background: linear-gradient(135deg, #f2ffe6 0%, #e6ffcc 100%);
+            border-left-color: #7aff66;
+        }
+        .example-card:nth-child(10) { 
+            background: linear-gradient(135deg, #fff0e6 0%, #ffe1cc 100%);
+            border-left-color: #ff9966;
+        }
+        
+        .example-original {
+            font-size: 13px;
+            color: #444;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .example-korean {
+            font-size: 15px;
+            font-weight: bold;
+            color: #2d3748;
+        }
+        
+        @keyframes slideLeft {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(calc(-280px * 10 - 30px * 10));
+            }
+        }
+        
+        /* 입력 섹션 */
         .input-section {
             display: flex;
             gap: 15px;
@@ -261,94 +248,145 @@
             transform: translateY(-2px);
         }
         
-        .style-grid {
+        /* 결과 섹션 - 반으로 나눈 화면 */
+        .result-display {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 15px;
-            margin: 20px 0;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
         }
         
-        .style-btn {
-            padding: 15px;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            background: white;
-            cursor: pointer;
+        .text-result {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            padding: 40px;
             text-align: center;
-            transition: all 0.2s;
+            color: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
         
-        .style-btn:hover {
-            border-color: #667eea;
+        .text-result h3 {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            opacity: 0.9;
         }
         
-        .style-btn.active {
-            border-color: #667eea;
-            background: #f7fafc;
-        }
-        
-        .style-preview {
-            width: 100%;
-            height: 30px;
-            border-radius: 5px;
-            margin-bottom: 8px;
-        }
-        
-        .result-section {
-            text-align: center;
-            padding: 40px 20px;
-        }
-        
-        .result-text {
+        .korean-name {
             font-size: 3em;
             font-weight: bold;
             margin: 20px 0;
-            padding: 30px;
-            border-radius: 15px;
-            color: white;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
         
-        .download-options {
+        .original-name {
+            font-size: 1.1em;
+            opacity: 0.8;
+        }
+        
+        .card-result {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
             display: flex;
             justify-content: center;
-            gap: 15px;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
             margin: 30px 0;
             flex-wrap: wrap;
+        }
+        
+        .download-btn, .share-btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
         
         .download-btn {
             background: linear-gradient(45deg, #48bb78, #38a169);
             color: white;
-            border: none;
-            padding: 15px 25px;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.2s;
+            box-shadow: 0 5px 15px rgba(72, 187, 120, 0.3);
         }
         
         .download-btn:hover {
             transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(72, 187, 120, 0.4);
         }
         
-        .background-options {
-            display: flex;
+        .share-btn {
+            background: linear-gradient(45deg, #ed8936, #dd6b20);
+            color: white;
+            box-shadow: 0 5px 15px rgba(237, 137, 54, 0.3);
+        }
+        
+        .share-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(237, 137, 54, 0.4);
+        }
+        
+        /* 공유 팝업 */
+        .share-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
             justify-content: center;
-            gap: 20px;
-            margin: 20px 0;
-            flex-wrap: wrap;
+            align-items: center;
+            z-index: 1000;
         }
         
-        .background-option {
-            display: flex;
-            align-items: center;
-            gap: 8px;
+        .share-popup-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+        }
+        
+        .share-url {
+            background: #f7fafc;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            margin: 15px 0;
+            word-break: break-all;
+            font-size: 14px;
+        }
+        
+        .copy-btn, .close-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 5px;
+            font-weight: 600;
+        }
+        
+        .copy-btn {
+            background: #667eea;
+            color: white;
+        }
+        
+        .close-btn {
+            background: #e2e8f0;
+            color: #2d3748;
         }
         
         .hidden {
-            display: none;
+            display: none !important;
         }
         
         .footer {
@@ -399,12 +437,16 @@
                 min-width: auto;
             }
             
-            .result-text {
-                font-size: 2em;
-                padding: 20px;
+            .result-display {
+                grid-template-columns: 1fr;
+                gap: 20px;
             }
             
-            .download-options {
+            .korean-name {
+                font-size: 2em;
+            }
+            
+            .action-buttons {
                 flex-direction: column;
                 align-items: center;
             }
@@ -413,41 +455,8 @@
                 grid-template-columns: repeat(2, 1fr);
             }
             
-            .style-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .footer-links a {
-                display: block;
-                margin: 8px 0;
-            }
-            
             .example-card {
                 min-width: 250px;
-                animation: moveRight 15s linear infinite;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .header h1 {
-                font-size: 2em;
-            }
-            
-            .card {
-                padding: 20px;
-            }
-            
-            .language-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .example-card {
-                min-width: 200px;
-                animation: moveRight 12s linear infinite;
-            }
-            
-            .examples-section {
-                padding: 20px;
             }
         }
     </style>
@@ -455,8 +464,8 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>✨ Name2Korean</h1>
-            <p>세계 각국의 이름을 아름다운 한글로 변환하세요</p>
+            <h1 id="siteTitle">✨ Name2Korean</h1>
+            <p id="siteDescription">세계 각국의 이름을 아름다운 한글로 변환하세요</p>
             
             <div style="margin-top: 20px;">
                 <a href="learn-korean.html" style="display: inline-block; background: rgba(255,255,255,0.2); color: white; text-decoration: none; padding: 12px 24px; border-radius: 25px; transition: all 0.3s ease; font-size: 16px;">
@@ -465,158 +474,121 @@
             </div>
         </div>
 
-        <!-- 예시 갤러리 -->
-        <div class="examples-section">
-            <div class="examples-title">See how names transform into Korean</div>
-            <div class="examples-scroll">
-                <!-- 영어 예시 -->
-                <div class="example-card">
-                    <div class="example-original">My name is John.</div>
-                    <div class="example-korean">My Korean name is 존!</div>
-                </div>
-                <div class="example-card">
-                    <div class="example-original">My name is Sarah.</div>
-                    <div class="example-korean">My Korean name is 사라!</div>
-                </div>
-                
-                <!-- 일본어 예시 -->
-                <div class="example-card">
-                    <div class="example-original">私の名前はたけしです。</div>
-                    <div class="example-korean">韓国名は 타케시 です!</div>
-                </div>
-                <div class="example-card">
-                    <div class="example-original">私の名前はゆきです。</div>
-                    <div class="example-korean">韓国名は 유키 です!</div>
-                </div>
-                
-                <!-- 중국어 예시 -->
-                <div class="example-card">
-                    <div class="example-original">我的名字是王明。</div>
-                    <div class="example-korean">我的韩文名字는 왕밍!</div>
-                </div>
-                <div class="example-card">
-                    <div class="example-original">我的名字是李华。</div>
-                    <div class="example-korean">我的韩文名字는 리화!</div>
-                </div>
-                
-                <!-- 스페인어 예시 -->
-                <div class="example-card">
-                    <div class="example-original">Mi nombre es Carlos.</div>
-                    <div class="example-korean">Mi nombre coreano es 카를로스!</div>
-                </div>
-                <div class="example-card">
-                    <div class="example-original">Mi nombre es María.</div>
-                    <div class="example-korean">Mi nombre coreano es 마리아!</div>
-                </div>
-                
-                <!-- 프랑스어 예시 -->
-                <div class="example-card">
-                    <div class="example-original">Je m'appelle Pierre.</div>
-                    <div class="example-korean">Mon nom coréen est 피에르!</div>
-                </div>
-                <div class="example-card">
-                    <div class="example-original">Je m'appelle Marie.</div>
-                    <div class="example-korean">Mon nom coréen est 마리!</div>
-                </div>
-            </div>
-        </div>
-
         <!-- 언어 선택 -->
         <div class="card">
-            <h3>🌍 언어 선택</h3>
-            <div class="language-grid" id="languageGrid">
-                <div class="language-btn active" data-lang="english">
+            <h3 id="languageTitle">🌍 언어 선택</h3>
+            <div class="language-grid">
+                <div class="language-btn active" onclick="changeLanguage('en')">
                     <div class="language-flag">🇺🇸</div>
                     <div>English</div>
                 </div>
-                <div class="language-btn" data-lang="japanese">
+                <div class="language-btn" onclick="changeLanguage('jp')">
                     <div class="language-flag">🇯🇵</div>
                     <div>日本語</div>
                 </div>
-                <div class="language-btn" data-lang="chinese">
+                <div class="language-btn" onclick="changeLanguage('cn')">
                     <div class="language-flag">🇨🇳</div>
                     <div>中文</div>
                 </div>
-                <div class="language-btn" data-lang="spanish">
+                <div class="language-btn" onclick="changeLanguage('es')">
                     <div class="language-flag">🇪🇸</div>
                     <div>Español</div>
                 </div>
-                <div class="language-btn" data-lang="french">
+                <div class="language-btn" onclick="changeLanguage('fr')">
                     <div class="language-flag">🇫🇷</div>
                     <div>Français</div>
                 </div>
             </div>
         </div>
 
+        <!-- 샘플 카드 갤러리 -->
+        <div class="examples-section">
+            <div class="examples-title" id="examplesTitle">✨ 이름이 한글로 변환되는 모습을 확인해보세요</div>
+            <div class="examples-scroll">
+                <div class="examples-strip">
+                    <div class="example-card">
+                        <div class="example-original">My name is John.</div>
+                        <div class="example-korean">My Korean name is 존!</div>
+                    </div>
+                    <div class="example-card">
+                        <div class="example-original">My name is Jane.</div>
+                        <div class="example-korean">My Korean name is 제인!</div>
+                    </div>
+                    <div class="example-card">
+                        <div class="example-original">私の名前はたけしです。</div>
+                        <div class="example-korean">私の韓国名は타케시です!</div>
+                    </div>
+                    <div class="example-card">
+                        <div class="example-original">我叫李华。</div>
+                        <div class="example-korean">我的韩文名字是리화!</div>
+                    </div>
+                    <div class="example-card">
+                        <div class="example-original">Mi nombre es María.</div>
+                        <div class="example-korean">Mi nombre coreano es 마리아!</div>
+                    </div>
+                    <div class="example-card">
+                        <div class="example-original">Je m'appelle Marie.</div>
+                        <div class="example-korean">Mon nom coréen est 마리!</div>
+                    </div>
+                    <div class="example-card">
+                        <div class="example-original">My name is Sarah.</div>
+                        <div class="example-korean">My Korean name is 사라!</div>
+                    </div>
+                    <div class="example-card">
+                        <div class="example-original">私の名前はゆきです。</div>
+                        <div class="example-korean">私の韓国名は유키です!</div>
+                    </div>
+                    <div class="example-card">
+                        <div class="example-original">我叫王明。</div>
+                        <div class="example-korean">我的韩文名字是왕밍!</div>
+                    </div>
+                    <div class="example-card">
+                        <div class="example-original">Mi nombre es Carlos.</div>
+                        <div class="example-korean">Mi nombre coreano es 카를로스!</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- 이름 입력 -->
         <div class="card">
+            <h3 id="convertTitle">🔄 이름 변환</h3>
             <div class="input-section">
                 <div class="input-field">
                     <label for="nameInput" id="inputLabel">Your name:</label>
                     <input type="text" id="nameInput" placeholder="e.g., John, Sarah, Michael..." />
                 </div>
-                <button class="convert-btn" onclick="convertName()">
+                <button class="convert-btn" onclick="convertName()" id="convertBtn">
                     🔄 Convert to Korean
                 </button>
             </div>
         </div>
 
-        <!-- 결과 섹션 -->
+        <!-- 결과 섹션 (반으로 나눈 화면) -->
         <div class="card hidden" id="resultSection">
-            <h3>✅ 변환 결과</h3>
-            <div class="result-section">
-                <div id="resultText" class="result-text"></div>
+            <h3 id="resultTitle">✅ 변환 결과</h3>
+            <div class="result-display">
+                <!-- 왼쪽: 텍스트 결과 -->
+                <div class="text-result">
+                    <h3 id="resultLabel">🎉 당신의 한국 이름</h3>
+                    <div class="korean-name" id="koreanNameText"></div>
+                    <div class="original-name" id="originalNameText"></div>
+                </div>
                 
-                <!-- 배경 옵션 -->
-                <div class="background-options">
-                    <label class="background-option">
-                        <input type="radio" name="background" value="true" checked>
-                        <span>배경 포함</span>
-                    </label>
-                    <label class="background-option">
-                        <input type="radio" name="background" value="false">
-                        <span>투명 배경</span>
-                    </label>
+                <!-- 오른쪽: 카드 결과 -->
+                <div class="card-result">
+                    <canvas id="nameCard" width="400" height="300" style="max-width: 100%; height: auto; border-radius: 10px;"></canvas>
                 </div>
-
-                <!-- 스타일 선택 -->
-                <h4>🎨 스타일 선택</h4>
-                <div class="style-grid" id="styleGrid">
-                    <div class="style-btn active" data-style="0">
-                        <div class="style-preview" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
-                        <div>클래식</div>
-                    </div>
-                    <div class="style-btn" data-style="1">
-                        <div class="style-preview" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"></div>
-                        <div>모던</div>
-                    </div>
-                    <div class="style-btn" data-style="2">
-                        <div class="style-preview" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);"></div>
-                        <div>전통</div>
-                    </div>
-                    <div class="style-btn" data-style="3">
-                        <div class="style-preview" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);"></div>
-                        <div>캘리그라피</div>
-                    </div>
-                    <div class="style-btn" data-style="4">
-                        <div class="style-preview" style="background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);"></div>
-                        <div>다크</div>
-                    </div>
-                    <div class="style-btn" data-style="5">
-                        <div class="style-preview" style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);"></div>
-                        <div>궁서</div>
-                    </div>
-                </div>
-
-                <!-- 캔버스 -->
-                <canvas id="nameCanvas" width="800" height="400" style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);"></canvas>
-
-                <!-- 다운로드 버튼 -->
-                <div class="download-options">
-                    <button class="download-btn" onclick="downloadImage()">
-                        📥 Download Image
-                    </button>
-                </div>
+            </div>
+            
+            <!-- 액션 버튼들 -->
+            <div class="action-buttons">
+                <button class="download-btn" onclick="downloadCard()" id="downloadBtn">
+                    📥 Download Image
+                </button>
+                <button class="share-btn" onclick="showSharePopup()" id="shareBtn">
+                    🔗 Share with Friends
+                </button>
             </div>
         </div>
 
@@ -634,256 +606,339 @@
         </div>
     </div>
 
+    <!-- 공유 팝업 -->
+    <div class="share-popup" id="sharePopup">
+        <div class="share-popup-content">
+            <h3>🔗 친구들과 공유하기</h3>
+            <p>아래 링크를 복사해서 친구들에게 공유해보세요!</p>
+            <div class="share-url" id="shareUrl"></div>
+            <div>
+                <button class="copy-btn" onclick="copyShareUrl()">📋 Copy Link</button>
+                <button class="close-btn" onclick="hideSharePopup()">✖️ Close</button>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // 변환 매핑 데이터
-        const conversionMaps = {
-            english: {
-                'john': '존', 'jane': '제인', 'mary': '메리', 'mike': '마이크',
-                'david': '데이빗', 'sarah': '사라', 'tom': '톰', 'lisa': '리사',
-                'james': '제임스', 'anna': '안나', 'peter': '피터', 'emma': '엠마',
-                'alex': '알렉스', 'chris': '크리스', 'kate': '케이트', 'paul': '폴',
-                'luke': '루크', 'nina': '니나', 'sam': '샘', 'amy': '에이미',
-                'ben': '벤', 'rose': '로즈', 'jack': '잭', 'lily': '릴리',
-                'robert': '로버트', 'jennifer': '제니퍼', 'william': '윌리엄', 'elizabeth': '엘리자베스',
-                'michael': '마이클', 'jessica': '제시카', 'matthew': '매튜', 'ashley': '애슐리',
-                'a': '아', 'e': '에', 'i': '이', 'o': '오', 'u': '우',
-                'b': 'ㅂ', 'p': 'ㅍ', 'd': 'ㄷ', 't': 'ㅌ', 'g': 'ㄱ', 'k': 'ㅋ',
-                'j': 'ㅈ', 'ch': 'ㅊ', 'f': 'ㅍ', 'v': 'ㅂ', 's': 'ㅅ', 'z': 'ㅈ',
-                'h': 'ㅎ', 'l': 'ㄹ', 'r': 'ㄹ', 'm': 'ㅁ', 'n': 'ㄴ'
+        let currentLanguage = 'en';
+        let currentOriginalName = '';
+        let currentKoreanName = '';
+
+        // 다국어 텍스트 (참고 코드 기반)
+        const translations = {
+            'en': {
+                siteTitle: '✨ Name2Korean',
+                siteDescription: 'Convert names from around the world to beautiful Korean!',
+                examplesTitle: '✨ See how names transform into Korean',
+                languageTitle: '🌍 Language Selection', 
+                convertTitle: '🔄 Name Conversion',
+                inputLabel: 'Your name:',
+                placeholder: 'e.g., John, Sarah, Michael...',
+                convertBtn: '🔄 Convert to Korean',
+                resultTitle: '✅ Conversion Result',
+                resultLabel: '🎉 Your Korean Name',
+                downloadBtn: '📥 Download Image',
+                shareBtn: '🔗 Share with Friends'
             },
-            japanese: {
-                'takeshi': '타케시', 'yuki': '유키', 'akira': '아키라', 'hiroshi': '히로시',
-                'kenji': '켄지', 'satoshi': '사토시', 'makoto': '마코토', 'ryuji': '류지'
+            'jp': {
+                siteTitle: '✨ 名前を韓国語に',
+                siteDescription: '世界中の名前を美しい韓国語に変換！',
+                examplesTitle: '✨ 名前がハングルに変換される様子をご確認ください',
+                languageTitle: '🌍 言語選択',
+                convertTitle: '🔄 名前変換', 
+                inputLabel: 'あなたの名前：',
+                placeholder: '例: たけし, ゆき, あきら...',
+                convertBtn: '🔄 ハングルに変換',
+                resultTitle: '✅ 変換結果',
+                resultLabel: '🎉 あなたの韓国名',
+                downloadBtn: '📥 画像をダウンロード',
+                shareBtn: '🔗 友達とシェア'
             },
-            chinese: {
-                'wang': '왕', 'li': '리', 'zhang': '장', 'liu': '류', 'chen': '첸',
-                'yang': '양', 'huang': '황', 'zhao': '조', 'wu': '우', 'zhou': '저우'
+            'cn': {
+                siteTitle: '✨ 名字转韩文', 
+                siteDescription: '将世界各地的名字转换为美丽的韩文！',
+                examplesTitle: '✨ 确认名字转换为韩文的样子',
+                languageTitle: '🌍 语言选择',
+                convertTitle: '🔄 名字转换',
+                inputLabel: '你的名字：',
+                placeholder: '例: 王明, 李华, 张伟...',
+                convertBtn: '🔄 转换为韩文',
+                resultTitle: '✅ 转换结果', 
+                resultLabel: '🎉 你的韩文名字',
+                downloadBtn: '📥 下载图片',
+                shareBtn: '🔗 与朋友分享'
             },
-            spanish: {
-                'maria': '마리아', 'jose': '호세', 'antonio': '안토니오', 'francisco': '프란시스코',
-                'manuel': '마누엘', 'david': '다비드', 'juan': '후안', 'javier': '하비에르'
+            'es': {
+                siteTitle: '✨ Nombre a Coreano',
+                siteDescription: '¡Convierte nombres de todo el mundo a hermoso coreano!',
+                examplesTitle: '✨ Confirma cómo los nombres se convierten al coreano',
+                languageTitle: '🌍 Selección de idioma',
+                convertTitle: '🔄 Conversión de nombres',
+                inputLabel: 'Tu nombre:',
+                placeholder: 'ej: María, José, Juan...',
+                convertBtn: '🔄 Convertir al coreano',
+                resultTitle: '✅ Resultado de conversión',
+                resultLabel: '🎉 Tu nombre coreano',
+                downloadBtn: '📥 Descargar imagen',
+                shareBtn: '🔗 Compartir con amigos'
             },
-            french: {
-                'pierre': '피에르', 'marie': '마리', 'jean': '장', 'michel': '미셸',
-                'philippe': '필립', 'alain': '알랭', 'bernard': '베르나르', 'christophe': '크리스토프'
+            'fr': {
+                siteTitle: '✨ Nom en Coréen',
+                siteDescription: 'Convertissez des noms du monde entier en coréen magnifique !',
+                examplesTitle: '✨ Confirmez comment les noms se convertissent en coréen',
+                languageTitle: '🌍 Sélection de langue',
+                convertTitle: '🔄 Conversion de noms',
+                inputLabel: 'Votre nom :',
+                placeholder: 'ex: Pierre, Marie, Jean...',
+                convertBtn: '🔄 Convertir en coréen',
+                resultTitle: '✅ Résultat de conversion',
+                resultLabel: '🎉 Votre nom en coréen',
+                downloadBtn: '📥 Télécharger l\'image',
+                shareBtn: '🔗 Partager avec des amis'
             }
         };
 
-        const styles = [
-            {
-                name: '클래식',
-                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                textColor: '#ffffff',
-                font: 'Noto Sans KR'
-            },
-            {
-                name: '모던',
-                background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
-                textColor: '#ffffff',
-                font: 'Noto Sans KR'
-            },
-            {
-                name: '전통',
-                background: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
-                textColor: '#2c3e50',
-                font: 'Nanum Myeongjo'
-            },
-            {
-                name: '캘리그라피',
-                background: 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)',
-                textColor: '#34495e',
-                font: 'Nanum Pen Script'
-            },
-            {
-                name: '다크',
-                background: 'linear-gradient(135deg, #2c3e50 0%, #34495e 100%)',
-                textColor: '#ecf0f1',
-                font: 'Noto Sans KR'
-            },
-            {
-                name: '궁서',
-                background: 'linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)',
-                textColor: '#8b4513',
-                font: 'Gungsuh'
+        // 언어 변경 함수 (참고 코드 기반)
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            
+            // 활성 언어 버튼 업데이트
+            document.querySelectorAll('.language-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.closest('.language-btn').classList.add('active');
+
+            const t = translations[lang] || translations['en'];
+            
+            // 텍스트 업데이트
+            document.getElementById('siteTitle').textContent = t.siteTitle;
+            document.getElementById('siteDescription').textContent = t.siteDescription;
+            document.getElementById('examplesTitle').textContent = t.examplesTitle;
+            document.getElementById('languageTitle').textContent = t.languageTitle;
+            document.getElementById('convertTitle').textContent = t.convertTitle;
+            document.getElementById('inputLabel').textContent = t.inputLabel;
+            document.getElementById('nameInput').placeholder = t.placeholder;
+            document.getElementById('convertBtn').textContent = t.convertBtn;
+            
+            // 결과 섹션이 보이는 경우에만 업데이트
+            if (!document.getElementById('resultSection').classList.contains('hidden')) {
+                document.getElementById('resultTitle').textContent = t.resultTitle;
+                document.getElementById('resultLabel').textContent = t.resultLabel;
+                document.getElementById('downloadBtn').textContent = t.downloadBtn;
+                document.getElementById('shareBtn').textContent = t.shareBtn;
             }
-        ];
+        }
 
-        let currentLanguage = 'english';
-        let currentStyle = 0;
-        let currentKoreanName = '';
-        let currentOriginalName = '';
+        // 한글 변환 함수 (참고 코드 기반)
+        function convertToKorean(name) {
+            const nameMap = {
+                // 일반적인 이름들
+                'john': '존', 'jane': '제인', 'mary': '메리', 'mike': '마이크',
+                'david': '데이빗', 'sarah': '사라', 'tom': '톰', 'lisa': '리사',
+                'james': '제임스', 'anna': '안나', 'peter': '피터', 'emma': '엠마',
+                'alex': '알렉스', 'chris': '크리스', 'kate': '케이트', 'paul': '폴'
+            };
+            
+            const lowerName = name.toLowerCase();
+            if (nameMap[lowerName]) {
+                return nameMap[lowerName];
+            }
+            
+            // 문자별 변환 (참고 코드 기반)
+            return name.split('').map(char => {
+                const charMap = {
+                    'a': '아', 'e': '에', 'i': '이', 'o': '오', 'u': '우',
+                    'b': 'ㅂ', 'c': 'ㅅ', 'd': 'ㄷ', 'f': 'ㅍ', 'g': 'ㄱ',
+                    'h': 'ㅎ', 'j': 'ㅈ', 'k': 'ㅋ', 'l': 'ㄹ', 'm': 'ㅁ',
+                    'n': 'ㄴ', 'p': 'ㅍ', 'q': 'ㅋ', 'r': 'ㄹ', 's': 'ㅅ',
+                    't': 'ㅌ', 'v': 'ㅂ', 'w': 'ㅜ', 'x': 'ㅈ', 'y': 'ㅛ', 'z': 'ㅈ'
+                };
+                return charMap[char.toLowerCase()] || char;
+            }).join('');
+        }
 
-        // 언어 선택
-        document.querySelectorAll('.language-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.language-btn').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                currentLanguage = this.dataset.lang;
-                updateInputPlaceholder();
+        // 이름 변환 함수 (참고 코드와 동일한 구조)
+        function convertName() {
+            const input = document.getElementById('nameInput').value.trim();
+            if (!input) {
+                alert('Please enter a name!');
+                return;
+            }
+
+            currentOriginalName = input;
+            currentKoreanName = convertToKorean(input);
+            
+            // 결과 표시
+            showResult();
+        }
+
+        // 결과 표시 함수
+        function showResult() {
+            // 텍스트 결과 업데이트
+            document.getElementById('koreanNameText').textContent = currentKoreanName;
+            document.getElementById('originalNameText').textContent = `← ${currentOriginalName}`;
+            
+            // 카드 그리기
+            drawNameCard();
+            
+            // 결과 섹션 표시
+            document.getElementById('resultSection').classList.remove('hidden');
+            
+            // 버튼 텍스트 업데이트
+            const t = translations[currentLanguage] || translations['en'];
+            document.getElementById('resultTitle').textContent = t.resultTitle;
+            document.getElementById('resultLabel').textContent = t.resultLabel;
+            document.getElementById('downloadBtn').textContent = t.downloadBtn;
+            document.getElementById('shareBtn').textContent = t.shareBtn;
+        }
+
+        // 카드 그리기 함수
+        function drawNameCard() {
+            const canvas = document.getElementById('nameCard');
+            const ctx = canvas.getContext('2d');
+            
+            canvas.width = 400;
+            canvas.height = 300;
+
+            // 랜덤 그라데이션 배경
+            const gradients = [
+                ['#667eea', '#764ba2'],
+                ['#f093fb', '#f5576c'],
+                ['#4facfe', '#00f2fe'],
+                ['#a8edea', '#fed6e3'],
+                ['#ffecd2', '#fcb69f'],
+                ['#43e97b', '#38f9d7']
+            ];
+            
+            const gradient = gradients[Math.floor(Math.random() * gradients.length)];
+            const canvasGradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+            canvasGradient.addColorStop(0, gradient[0]);
+            canvasGradient.addColorStop(1, gradient[1]);
+            
+            ctx.fillStyle = canvasGradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // 카드 영역
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
+            ctx.beginPath();
+            ctx.roundRect(30, 50, canvas.width - 60, canvas.height - 100, 15);
+            ctx.fill();
+
+            // 원문 텍스트
+            ctx.fillStyle = '#666666';
+            ctx.font = '16px Noto Sans KR';
+            ctx.textAlign = 'center';
+            ctx.fillText(getOriginalText(), canvas.width / 2, 120);
+
+            // 한국어 이름
+            ctx.fillStyle = '#2d3748';
+            ctx.font = 'bold 24px Noto Sans KR';
+            ctx.fillText(getKoreanText(), canvas.width / 2, 170);
+
+            // 하단 장식
+            ctx.fillStyle = '#000000';
+            ctx.font = '14px Noto Sans KR';
+            ctx.fillText('✨ Name2Korean ✨', canvas.width / 2, 220);
+        }
+
+        // Canvas roundRect 폴리필
+        if (!CanvasRenderingContext2D.prototype.roundRect) {
+            CanvasRenderingContext2D.prototype.roundRect = function(x, y, width, height, radius) {
+                this.beginPath();
+                this.moveTo(x + radius, y);
+                this.lineTo(x + width - radius, y);
+                this.quadraticCurveTo(x + width, y, x + width, y + radius);
+                this.lineTo(x + width, y + height - radius);
+                this.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+                this.lineTo(x + radius, y + height);
+                this.quadraticCurveTo(x, y + height, x, y + height - radius);
+                this.lineTo(x, y + radius);
+                this.quadraticCurveTo(x, y, x + radius, y);
+                this.closePath();
+            };
+        }
+
+        // 언어별 텍스트 템플릿
+        function getOriginalText() {
+            const templates = {
+                'en': `My name is ${currentOriginalName}.`,
+                'jp': `私の名前は${currentOriginalName}です。`,
+                'cn': `我叫${currentOriginalName}。`,
+                'es': `Mi nombre es ${currentOriginalName}.`,
+                'fr': `Je m'appelle ${currentOriginalName}.`
+            };
+            return templates[currentLanguage] || templates['en'];
+        }
+
+        function getKoreanText() {
+            const templates = {
+                'en': `My Korean name is ${currentKoreanName}!`,
+                'jp': `私の韓国名は${currentKoreanName}です!`,
+                'cn': `我的韩文名字是${currentKoreanName}!`,
+                'es': `Mi nombre coreano es ${currentKoreanName}!`,
+                'fr': `Mon nom coréen est ${currentKoreanName}!`
+            };
+            return templates[currentLanguage] || templates['en'];
+        }
+
+        // 다운로드 함수
+        function downloadCard() {
+            const canvas = document.getElementById('nameCard');
+            const link = document.createElement('a');
+            link.download = `korean-name-${currentKoreanName}.png`;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+
+        // 공유 팝업 표시
+        function showSharePopup() {
+            const baseUrl = window.location.origin + window.location.pathname;
+            const shareUrl = `${baseUrl}?shared=${encodeURIComponent(currentOriginalName)}_${encodeURIComponent(currentKoreanName)}&lang=${currentLanguage}`;
+            
+            document.getElementById('shareUrl').textContent = shareUrl;
+            document.getElementById('sharePopup').style.display = 'flex';
+        }
+
+        // 공유 팝업 숨기기
+        function hideSharePopup() {
+            document.getElementById('sharePopup').style.display = 'none';
+        }
+
+        // URL 복사
+        function copyShareUrl() {
+            const shareUrl = document.getElementById('shareUrl').textContent;
+            navigator.clipboard.writeText(shareUrl).then(() => {
+                alert('링크가 복사되었습니다! 친구들에게 공유해보세요 🎉');
+            }).catch(() => {
+                // 폴백: 텍스트 선택
+                const range = document.createRange();
+                range.selectNode(document.getElementById('shareUrl'));
+                window.getSelection().removeAllRanges();
+                window.getSelection().addRange(range);
+                alert('링크를 복사하세요!');
             });
-        });
+        }
 
-        // 스타일 선택
-        document.querySelectorAll('.style-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.style-btn').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                currentStyle = parseInt(this.dataset.style);
-                if (currentKoreanName) {
-                    drawCanvas();
-                }
-            });
-        });
-
-        // 배경 옵션 변경
-        document.querySelectorAll('input[name="background"]').forEach(radio => {
-            radio.addEventListener('change', function() {
-                if (currentKoreanName) {
-                    drawCanvas();
-                }
-            });
-        });
-
-        // Enter 키 처리
+        // Enter 키 이벤트
         document.getElementById('nameInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 convertName();
             }
         });
 
-        function updateInputPlaceholder() {
-            const input = document.getElementById('nameInput');
-            const label = document.getElementById('inputLabel');
-            
-            const placeholders = {
-                english: { label: 'Your name:', placeholder: 'e.g., John, Sarah, Michael...' },
-                japanese: { label: 'お名前:', placeholder: 'e.g., たけし, ゆき, あきら...' },
-                chinese: { label: '您的姓名:', placeholder: '例: 王, 李, 张...' },
-                spanish: { label: 'Tu nombre:', placeholder: 'ej: María, José, Juan...' },
-                french: { label: 'Votre nom:', placeholder: 'ex: Pierre, Marie, Jean...' }
-            };
-
-            label.textContent = placeholders[currentLanguage].label;
-            input.placeholder = placeholders[currentLanguage].placeholder;
-        }
-
-        function convertToKorean(name, language) {
-            const conversionMap = conversionMaps[language] || conversionMaps.english;
-            const lowerName = name.toLowerCase().trim();
-            
-            // 직접 매핑 확인
-            if (conversionMap[lowerName]) {
-                return conversionMap[lowerName];
-            }
-
-            // 문자별 변환
-            let result = '';
-            for (let i = 0; i < lowerName.length; i++) {
-                const char = lowerName[i];
-                if (conversionMap[char]) {
-                    result += conversionMap[char];
-                } else {
-                    // 기본 변환
-                    const fallbackMap = {
-                        'a': '아', 'e': '에', 'i': '이', 'o': '오', 'u': '우',
-                        'y': '이', 'w': '우'
-                    };
-                    result += fallbackMap[char] || char;
-                }
-            }
-
-            return result || lowerName;
-        }
-
-        function convertName() {
-            const input = document.getElementById('nameInput');
-            const name = input.value.trim();
-            
-            if (!name) {
-                alert('Please enter a name!');
-                return;
-            }
-
-            currentOriginalName = name;
-            currentKoreanName = convertToKorean(name, currentLanguage);
-            
-            // 결과 표시
-            document.getElementById('resultSection').classList.remove('hidden');
-            drawCanvas();
-        }
-
-        function drawCanvas() {
-            const canvas = document.getElementById('nameCanvas');
-            const ctx = canvas.getContext('2d');
-            const style = styles[currentStyle];
-            const hasBackground = document.querySelector('input[name="background"]:checked').value === 'true';
-
-            canvas.width = 800;
-            canvas.height = 400;
-
-            // 배경 그리기
-            if (hasBackground) {
-                const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-                const colors = style.background.match(/#[a-fA-F0-9]{6}/g) || ['#667eea', '#764ba2'];
-                gradient.addColorStop(0, colors[0]);
-                gradient.addColorStop(1, colors[1] || colors[0]);
-                ctx.fillStyle = gradient;
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-            } else {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-            }
-
-            // 텍스트 그리기
-            ctx.fillStyle = style.textColor;
-            ctx.font = `bold 80px ${style.font}`;
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            
-            if (hasBackground) {
-                ctx.shadowColor = 'rgba(0,0,0,0.3)';
-                ctx.shadowBlur = 10;
-                ctx.shadowOffsetX = 3;
-                ctx.shadowOffsetY = 3;
-            } else {
-                ctx.strokeStyle = '#333333';
-                ctx.lineWidth = 2;
-                ctx.strokeText(currentKoreanName, canvas.width / 2, canvas.height / 2);
-            }
-
-            ctx.fillText(currentKoreanName, canvas.width / 2, canvas.height / 2);
-
-            if (hasBackground) {
-                ctx.shadowBlur = 0;
-                ctx.shadowOffsetX = 0;
-                ctx.shadowOffsetY = 0;
-                ctx.font = `20px ${style.font}`;
-                ctx.globalAlpha = 0.8;
-                ctx.fillText(`${currentOriginalName} → ${currentKoreanName}`, canvas.width / 2, canvas.height - 40);
-            }
-
-            // 결과 텍스트 업데이트
-            const resultText = document.getElementById('resultText');
-            resultText.textContent = `${currentOriginalName} → ${currentKoreanName}`;
-            resultText.style.background = style.background;
-            resultText.style.color = style.textColor;
-        }
-
-        function downloadImage() {
-            const canvas = document.getElementById('nameCanvas');
-            const hasBackground = document.querySelector('input[name="background"]:checked').value === 'true';
-            
-            const link = document.createElement('a');
-            const bgText = hasBackground ? 'bg' : 'transparent';
-            link.download = `korean-name-${currentKoreanName}-${bgText}.png`;
-            link.href = canvas.toDataURL('image/png');
-            link.click();
-        }
-
-        // 페이지 로드 시 초기화
+        // 폰트 선택 변경시 카드 재그리기
         document.addEventListener('DOMContentLoaded', function() {
-            updateInputPlaceholder();
+            document.getElementById('fontSelect').addEventListener('change', function() {
+                if (currentKoreanName) {
+                    drawNameCard();
+                }
+            });
+        });
+
+        // 팝업 외부 클릭시 닫기
+        document.getElementById('sharePopup').addEventListener('click', function(e) {
+            if (e.target === this) {
+                hideSharePopup();
+            }
         });
     </script>
 </body>
 </html>
-
