@@ -519,7 +519,7 @@
                     </div>
                     <div class="example-card">
                         <div class="example-original">私の名前はたけしです。</div>
-                        <div class="example-korean">私の韓国名は타케시です!</div>
+                        <div class="example-korean">私の韓国名はタケシです!</div>
                     </div>
                     <div class="example-card">
                         <div class="example-original">我叫李华。</div>
@@ -543,7 +543,7 @@
                     </div>
                     <div class="example-card">
                         <div class="example-original">我叫王明。</div>
-                        <div class="example-korean">我的韩文名字是왕밍!</div>
+                        <div class="example-korean">我的韩文名字是왕명!</div>
                     </div>
                     <div class="example-card">
                         <div class="example-original">Mi nombre es Carlos.</div>
@@ -617,17 +617,292 @@
             <div class="share-url" id="shareUrl"></div>
             <div>
                 <button class="copy-btn" onclick="copyShareUrl()">📋 Copy Link</button>
-                <button class="close-btn" onclick="hideSharePopup()">✖️ Close</button>
+                <button class="close-btn" onclick="hideSharePopup()">❌ Close</button>
             </div>
         </div>
     </div>
 
     <script>
+        // 한글 음절 조합 시스템
+        class KoreanSyllableComposer {
+            constructor() {
+                // 한글 자모 유니코드 정보
+                this.HANGUL_BASE = 0xAC00;
+                this.INITIAL_COUNT = 19;
+                this.VOWEL_COUNT = 21;
+                this.FINAL_COUNT = 28;
+                
+                // 초성 (자음)
+                this.initials = [
+                    'ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ', 
+                    'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ'
+                ];
+                
+                // 중성 (모음)
+                this.vowels = [
+                    'ㅏ', 'ㅐ', 'ㅑ', 'ㅒ', 'ㅓ', 'ㅔ', 'ㅕ', 'ㅖ', 'ㅗ', 'ㅘ',
+                    'ㅙ', 'ㅚ', 'ㅛ', 'ㅜ', 'ㅝ', 'ㅞ', 'ㅟ', 'ㅠ', 'ㅡ', 'ㅢ', 'ㅣ'
+                ];
+                
+                // 종성 (받침)
+                this.finals = [
+                    '', 'ㄱ', 'ㄲ', 'ㄳ', 'ㄴ', 'ㄵ', 'ㄶ', 'ㄷ', 'ㄹ', 'ㄺ',
+                    'ㄻ', 'ㄼ', 'ㄽ', 'ㄾ', 'ㄿ', 'ㅀ', 'ㅁ', 'ㅂ', 'ㅄ', 'ㅅ',
+                    'ㅆ', 'ㅇ', 'ㅈ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ'
+                ];
+            }
+            
+            // 개별 자모를 완성된 한글 음절로 조합
+            compose(initial, vowel, final = '') {
+                const initialIndex = this.initials.indexOf(initial);
+                const vowelIndex = this.vowels.indexOf(vowel);
+                const finalIndex = this.finals.indexOf(final);
+                
+                if (initialIndex === -1 || vowelIndex === -1 || finalIndex === -1) {
+                    return initial + vowel + final; // 조합 실패시 그대로 반환
+                }
+                
+                const syllableCode = this.HANGUL_BASE + 
+                    (initialIndex * this.VOWEL_COUNT * this.FINAL_COUNT) +
+                    (vowelIndex * this.FINAL_COUNT) +
+                    finalIndex;
+                    
+                return String.fromCharCode(syllableCode);
+            }
+        }
+
+        // 개선된 영어-한글 변환기
+        class ImprovedEnglishToKoreanConverter {
+            constructor() {
+                this.syllableComposer = new KoreanSyllableComposer();
+                
+                // 영어 자음 -> 한글 자음 매핑
+                this.consonantMap = {
+                    'b': 'ㅂ', 'p': 'ㅍ', 'd': 'ㄷ', 't': 'ㅌ',
+                    'g': 'ㄱ', 'k': 'ㅋ', 'f': 'ㅍ', 'v': 'ㅂ',
+                    's': 'ㅅ', 'z': 'ㅈ', 'h': 'ㅎ', 'j': 'ㅈ',
+                    'm': 'ㅁ', 'n': 'ㄴ', 'l': 'ㄹ', 'r': 'ㄹ',
+                    'w': 'ㅜ', 'y': 'ㅣ', 'c': 'ㅋ'
+                };
+
+                // 개선된 모음 매핑
+                this.vowelMap = {
+                    'a': 'ㅏ',   
+                    'e': 'ㅔ',   
+                    'i': 'ㅣ',   
+                    'o': 'ㅗ',   
+                    'u': 'ㅜ'    
+                };
+
+                // 정확한 영어 이름 사전
+                this.nameDict = {
+                    'aaron': '아론', 'adam': '아담', 'adrian': '아드리안', 'alan': '알란',
+                    'albert': '알버트', 'alex': '알렉스', 'alexander': '알렉산더', 'andrew': '앤드류',
+                    'anthony': '앤서니', 'arthur': '아서', 'austin': '오스틴', 'benjamin': '벤자민',
+                    'brian': '브라이언', 'bruce': '브루스', 'bryan': '브라이언', 'carl': '칼',
+                    'charles': '찰스', 'chris': '크리스', 'christopher': '크리스토퍼', 'craig': '크레이그',
+                    'daniel': '다니엘', 'david': '데이비드', 'dennis': '데니스', 'douglas': '더글라스',
+                    'edward': '에드워드', 'eric': '에릭', 'eugene': '유진', 'frank': '프랭크',
+                    'gary': '게리', 'george': '조지', 'gerald': '제럴드', 'harold': '해럴드',
+                    'henry': '헨리', 'howard': '하워드', 'jack': '잭', 'james': '제임스',
+                    'jason': '제이슨', 'jeffrey': '제프리', 'jeremy': '제레미', 'jerry': '제리',
+                    'jesse': '제시', 'jimmy': '지미', 'john': '존', 'jon': '존', 'jonathan': '조나단',
+                    'jordan': '조던', 'joseph': '조제프', 'joshua': '조슈아', 'justin': '저스틴',
+                    'keith': '키스', 'kenneth': '케네스', 'kevin': '케빈', 'kyle': '카일',
+                    'larry': '래리', 'lawrence': '로렌스', 'louis': '루이스', 'mark': '마크',
+                    'martin': '마틴', 'matthew': '매튜', 'michael': '마이클', 'nicholas': '니콜라스',
+                    'patrick': '패트릭', 'paul': '폴', 'peter': '피터', 'philip': '필립',
+                    'raymond': '레이먼드', 'richard': '리처드', 'robert': '로버트', 'ronald': '로날드',
+                    'ryan': '라이언', 'samuel': '사무엘', 'scott': '스콧', 'sean': '숀',
+                    'stephen': '스티븐', 'steven': '스티븐', 'thomas': '토마스', 'timothy': '티모시',
+                    'todd': '토드', 'victor': '빅터', 'walter': '월터', 'william': '윌리엄',
+                    
+                    // 문제된 이름들 정확히 추가
+                    'casey': '케이시', 'riley': '라일리', 'sam': '샘', 'taylor': '테일러',
+                    
+                    // 여성 이름들
+                    'amanda': '아만다', 'amy': '에이미', 'andrea': '안드레아', 'angela': '안젤라',
+                    'anna': '안나', 'ashley': '애슐리', 'barbara': '바바라', 'betty': '베티',
+                    'brenda': '브렌다', 'carol': '캐롤', 'carolyn': '캐롤린', 'catherine': '캐서린',
+                    'cheryl': '셰릴', 'christina': '크리스티나', 'christine': '크리스틴', 'cynthia': '신시아',
+                    'deborah': '데보라', 'diana': '다이애나', 'donna': '도나', 'dorothy': '도로시',
+                    'elizabeth': '엘리자베스', 'emily': '에밀리', 'emma': '에마', 'helen': '헬렌',
+                    'jacqueline': '재클린', 'jane': '제인', 'janet': '자넷', 'jennifer': '제니퍼',
+                    'jessica': '제시카', 'joan': '조안', 'judith': '주디스', 'judy': '주디',
+                    'julia': '줄리아', 'julie': '줄리', 'karen': '카렌', 'katherine': '캐서린',
+                    'kathy': '캐시', 'kelly': '켈리', 'kimberly': '킴벌리', 'laura': '로라',
+                    'linda': '린다', 'lisa': '리사', 'lori': '로리', 'margaret': '마가렛',
+                    'maria': '마리아', 'marie': '마리', 'marilyn': '마릴린', 'martha': '마사',
+                    'mary': '메리', 'melissa': '멜리사', 'michelle': '미셸', 'nancy': '낸시',
+                    'nicole': '니콜', 'pamela': '파멜라', 'patricia': '패트리샤', 'rebecca': '레베카',
+                    'ruth': '루스', 'sandra': '산드라', 'sarah': '사라', 'sharon': '샤론',
+                    'stephanie': '스테파니', 'susan': '수잔', 'teresa': '테레사', 'theresa': '테레사',
+                    'virginia': '버지니아', 'wendy': '웬디'
+                };
+
+                // 특수 조합 처리
+                this.specialCombinations = {
+                    'ay': '에이',   // Taylor, Casey
+                    'ey': '이',     // Riley  
+                    'er': '어',     // Taylor
+                    'or': '오',
+                    'ar': '아',
+                    'ir': '어',
+                    'ur': '어',
+                    'ch': '치',
+                    'sh': '쉬',
+                    'th': '스',
+                    'ph': '프',
+                    'ck': '크',
+                    'ng': 'ㅇ',
+                    'ly': '리',     // Riley
+                    'ry': '리'      // 끝나는 ry
+                };
+            }
+
+            // 메인 변환 함수
+            convert(englishName) {
+                const cleanName = englishName.toLowerCase().trim();
+                
+                // 사전에 있는 이름이면 바로 반환
+                if (this.nameDict[cleanName]) {
+                    return this.nameDict[cleanName];
+                }
+                
+                // 발음 기반 변환
+                return this.advancedPhoneticConvert(cleanName);
+            }
+
+            // 개선된 발음 기반 변환
+            advancedPhoneticConvert(name) {
+                let result = '';
+                let i = 0;
+                
+                while (i < name.length) {
+                    let found = false;
+                    
+                    // 특수 조합 먼저 확인 (긴 것부터)
+                    for (let len = 3; len >= 2; len--) {
+                        if (i + len <= name.length) {
+                            const substr = name.substring(i, i + len);
+                            
+                            if (this.specialCombinations[substr]) {
+                                result += this.specialCombinations[substr];
+                                i += len;
+                                found = true;
+                                break;
+                            }
+                        }
+                    }
+                    
+                    // 특수 조합이 없으면 음절 단위로 처리
+                    if (!found) {
+                        const syllable = this.extractSyllable(name, i);
+                        result += this.convertSyllableToKorean(syllable.text);
+                        i += syllable.length;
+                    }
+                }
+                
+                return result || name;
+            }
+
+            // 음절 추출
+            extractSyllable(name, startIndex) {
+                let syllable = '';
+                let i = startIndex;
+                
+                // 자음으로 시작
+                while (i < name.length && !this.isVowel(name[i])) {
+                    syllable += name[i];
+                    i++;
+                }
+                
+                // 모음 추가
+                if (i < name.length && this.isVowel(name[i])) {
+                    syllable += name[i];
+                    i++;
+                }
+                
+                // 종성 자음 (하나만)
+                if (i < name.length && !this.isVowel(name[i])) {
+                    // 다음이 모음이면 현재 자음은 다음 음절로
+                    if (i + 1 < name.length && this.isVowel(name[i + 1])) {
+                        // 현재 자음은 다음 음절의 초성
+                    } else {
+                        syllable += name[i];
+                        i++;
+                    }
+                }
+                
+                return {
+                    text: syllable,
+                    length: i - startIndex
+                };
+            }
+
+            // 개별 음절을 한글로 변환
+            convertSyllableToKorean(syllable) {
+                if (!syllable) return '';
+                
+                let initial = 'ㅇ';
+                let vowel = 'ㅡ';
+                let final = '';
+                
+                let i = 0;
+                
+                // 초성
+                if (i < syllable.length && !this.isVowel(syllable[i])) {
+                    initial = this.consonantMap[syllable[i]] || 'ㅇ';
+                    i++;
+                }
+                
+                // 중성
+                if (i < syllable.length && this.isVowel(syllable[i])) {
+                    vowel = this.vowelMap[syllable[i]] || 'ㅡ';
+                    i++;
+                }
+                
+                // 종성
+                if (i < syllable.length && !this.isVowel(syllable[i])) {
+                    final = this.consonantMap[syllable[i]] || '';
+                }
+                
+                // 안전한 한글 조합
+                try {
+                    return this.syllableComposer.compose(initial, vowel, final);
+                } catch (error) {
+                    // 조합 실패시 단순 연결
+                    return initial + vowel + final;
+                }
+            }
+
+            isVowel(char) {
+                return 'aeiou'.includes(char);
+            }
+        }
+
+        // 다른 언어들을 위한 기본 변환기
+        function convertToKoreanOtherLanguages(name, language) {
+            const basicMap = {
+                'a': '아', 'e': '에', 'i': '이', 'o': '오', 'u': '우',
+                'b': 'ㅂ', 'c': 'ㅋ', 'd': 'ㄷ', 'f': 'ㅍ', 'g': 'ㄱ',
+                'h': 'ㅎ', 'j': 'ㅈ', 'k': 'ㅋ', 'l': 'ㄹ', 'm': 'ㅁ',
+                'n': 'ㄴ', 'p': 'ㅍ', 'q': 'ㅋ', 'r': 'ㄹ', 's': 'ㅅ',
+                't': 'ㅌ', 'v': 'ㅂ', 'w': 'ㅜ', 'x': 'ㅅ', 'y': 'ㅣ', 'z': 'ㅈ'
+            };
+            
+            return name.toLowerCase().split('').map(char => {
+                return basicMap[char] || char;
+            }).join('');
+        }
+
+        // 전역 변수들
         let currentLanguage = 'en';
         let currentOriginalName = '';
         let currentKoreanName = '';
+        const englishConverter = new ImprovedEnglishToKoreanConverter();
 
-        // 다국어 텍스트 (참고 코드 기반)
+        // 언어별 텍스트 번역
         const translations = {
             'en': {
                 siteTitle: '✨ Name2Korean',
@@ -701,7 +976,7 @@
             }
         };
 
-        // 언어 변경 함수 (참고 코드 기반)
+        // 언어 변경 함수
         function changeLanguage(lang) {
             currentLanguage = lang;
             
@@ -730,35 +1005,78 @@
             }
         }
 
-        // 한글 변환 함수 (참고 코드 기반)
-        function convertToKorean(name) {
-            const nameMap = {
-                // 일반적인 이름들
-                'john': '존', 'jane': '제인', 'mary': '메리', 'mike': '마이크',
-                'david': '데이빗', 'sarah': '사라', 'tom': '톰', 'lisa': '리사',
-                'james': '제임스', 'anna': '안나', 'peter': '피터', 'emma': '엠마',
-                'alex': '알렉스', 'chris': '크리스', 'kate': '케이트', 'paul': '폴'
+        // 개선된 한글 변환 함수 (언어별 처리)
+        function convertToKorean(name, language) {
+            switch(language) {
+                case 'en':
+                    return englishConverter.convert(name);
+                case 'jp':
+                    return convertJapaneseName(name);
+                case 'cn':
+                    return convertChineseName(name);
+                case 'es':
+                    return convertSpanishName(name);
+                case 'fr':
+                    return convertFrenchName(name);
+                default:
+                    return englishConverter.convert(name);
+            }
+        }
+
+        // 일본어 이름 변환
+        function convertJapaneseName(name) {
+            const japaneseMap = {
+                'takeshi': '타케시', 'yuki': '유키', 'akira': '아키라',
+                'hiroshi': '히로시', 'satoshi': '사토시', 'kenji': '켄지',
+                'sakura': '사쿠라', 'mai': '마이',
+                'ai': '아이', 'rei': '레이', 'miku': '미쿠'
             };
             
             const lowerName = name.toLowerCase();
-            if (nameMap[lowerName]) {
-                return nameMap[lowerName];
-            }
-            
-            // 문자별 변환 (참고 코드 기반)
-            return name.split('').map(char => {
-                const charMap = {
-                    'a': '아', 'e': '에', 'i': '이', 'o': '오', 'u': '우',
-                    'b': 'ㅂ', 'c': 'ㅅ', 'd': 'ㄷ', 'f': 'ㅍ', 'g': 'ㄱ',
-                    'h': 'ㅎ', 'j': 'ㅈ', 'k': 'ㅋ', 'l': 'ㄹ', 'm': 'ㅁ',
-                    'n': 'ㄴ', 'p': 'ㅍ', 'q': 'ㅋ', 'r': 'ㄹ', 's': 'ㅅ',
-                    't': 'ㅌ', 'v': 'ㅂ', 'w': 'ㅜ', 'x': 'ㅈ', 'y': 'ㅛ', 'z': 'ㅈ'
-                };
-                return charMap[char.toLowerCase()] || char;
-            }).join('');
+            return japaneseMap[lowerName] || convertToKoreanOtherLanguages(name, 'jp');
         }
 
-        // 이름 변환 함수 (참고 코드와 동일한 구조)
+        // 중국어 이름 변환
+        function convertChineseName(name) {
+            const chineseMap = {
+                'wang': '왕', 'li': '리', 'zhang': '장',
+                'liu': '류', 'chen': '첸', 'yang': '양',
+                'huang': '황', 'zhao': '조', 'wu': '우',
+                'ming': '명', 'wei': '웨이', 'lei': '레이',
+                'hua': '화', 'juan': '주안', 'yan': '얀'
+            };
+            
+            const lowerName = name.toLowerCase();
+            return chineseMap[lowerName] || convertToKoreanOtherLanguages(name, 'cn');
+        }
+
+        // 스페인어 이름 변환
+        function convertSpanishName(name) {
+            const spanishMap = {
+                'maria': '마리아', 'jose': '호세', 'juan': '후안',
+                'antonio': '안토니오', 'francisco': '프란시스코', 'manuel': '마누엘',
+                'ana': '아나', 'carmen': '카르멘', 'dolores': '돌로레스',
+                'carlos': '카를로스', 'miguel': '미구엘', 'rafael': '라파엘'
+            };
+            
+            const lowerName = name.toLowerCase();
+            return spanishMap[lowerName] || convertToKoreanOtherLanguages(name, 'es');
+        }
+
+        // 프랑스어 이름 변환
+        function convertFrenchName(name) {
+            const frenchMap = {
+                'pierre': '피에르', 'marie': '마리', 'jean': '장',
+                'michel': '미셸', 'philippe': '필립', 'alain': '알랑',
+                'bernard': '베르나르', 'christophe': '크리스토프', 'laurent': '로랑',
+                'nathalie': '나탈리', 'isabelle': '이자벨', 'sylvie': '실비'
+            };
+            
+            const lowerName = name.toLowerCase();
+            return frenchMap[lowerName] || convertToKoreanOtherLanguages(name, 'fr');
+        }
+
+        // 이름 변환 함수 (메인)
         function convertName() {
             const input = document.getElementById('nameInput').value.trim();
             if (!input) {
@@ -767,7 +1085,7 @@
             }
 
             currentOriginalName = input;
-            currentKoreanName = convertToKorean(input);
+            currentKoreanName = convertToKorean(input, currentLanguage);
             
             // 결과 표시
             showResult();
@@ -793,6 +1111,23 @@
             document.getElementById('shareBtn').textContent = t.shareBtn;
         }
 
+        // Canvas roundRect 폴리필
+        if (!CanvasRenderingContext2D.prototype.roundRect) {
+            CanvasRenderingContext2D.prototype.roundRect = function(x, y, width, height, radius) {
+                this.beginPath();
+                this.moveTo(x + radius, y);
+                this.lineTo(x + width - radius, y);
+                this.quadraticCurveTo(x + width, y, x + width, y + radius);
+                this.lineTo(x + width, y + height - radius);
+                this.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+                this.lineTo(x + radius, y + height);
+                this.quadraticCurveTo(x, y + height, x, y + height - radius);
+                this.lineTo(x, y + radius);
+                this.quadraticCurveTo(x, y, x + radius, y);
+                this.closePath();
+            };
+        }
+
         // 카드 그리기 함수
         function drawNameCard() {
             const canvas = document.getElementById('nameCard');
@@ -801,7 +1136,7 @@
             canvas.width = 400;
             canvas.height = 300;
 
-            // 랜덤 그라데이션 배경
+            // 랜덤 그라디언트 배경
             const gradients = [
                 ['#667eea', '#764ba2'],
                 ['#f093fb', '#f5576c'],
@@ -840,23 +1175,6 @@
             ctx.fillStyle = '#000000';
             ctx.font = '14px Noto Sans KR';
             ctx.fillText('✨ Name2Korean ✨', canvas.width / 2, 220);
-        }
-
-        // Canvas roundRect 폴리필
-        if (!CanvasRenderingContext2D.prototype.roundRect) {
-            CanvasRenderingContext2D.prototype.roundRect = function(x, y, width, height, radius) {
-                this.beginPath();
-                this.moveTo(x + radius, y);
-                this.lineTo(x + width - radius, y);
-                this.quadraticCurveTo(x + width, y, x + width, y + radius);
-                this.lineTo(x + width, y + height - radius);
-                this.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
-                this.lineTo(x + radius, y + height);
-                this.quadraticCurveTo(x, y + height, x, y + height - radius);
-                this.lineTo(x, y + radius);
-                this.quadraticCurveTo(x, y, x + radius, y);
-                this.closePath();
-            };
         }
 
         // 언어별 텍스트 템플릿
@@ -921,28 +1239,20 @@
         }
 
         // Enter 키 이벤트
-        document.getElementById('nameInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                convertName();
-            }
-        });
-
-        // 폰트 선택 변경시 카드 재그리기
         document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('fontSelect').addEventListener('change', function() {
-                if (currentKoreanName) {
-                    drawNameCard();
+            document.getElementById('nameInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    convertName();
                 }
             });
-        });
-
-        // 팝업 외부 클릭시 닫기
-        document.getElementById('sharePopup').addEventListener('click', function(e) {
-            if (e.target === this) {
-                hideSharePopup();
-            }
+            
+            // 팝업 외부 클릭시 닫기
+            document.getElementById('sharePopup').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    hideSharePopup();
+                }
+            });
         });
     </script>
 </body>
 </html>
-
