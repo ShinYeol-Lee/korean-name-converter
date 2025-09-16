@@ -1,19 +1,18 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <title>Name2Korean - 다국어 한글 변환기</title>
-    <meta name="description" content="세계 각국의 이름을 아름다운 한글로 변환하고 다운로드하세요. 영어, 일본어, 중국어, 스페인어, 프랑스어 지원">
+    <title>Name2Korean - English to Korean Name Converter</title>
+    <meta name="description" content="Convert your English name to beautiful Korean! Perfect for K-pop fans, Korean learners, and cultural enthusiasts.">
 
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6284901806810396"
-     crossorigin="anonymous"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6284901806810396" crossorigin="anonymous"></script>
     
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&family=Nanum+Myeongjo:wght@400;700&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     
     <style>
         * {
@@ -23,14 +22,14 @@
         }
         
         body {
-            font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             line-height: 1.6;
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 20px;
         }
@@ -42,76 +41,281 @@
         }
         
         .header h1 {
-            font-size: 3em;
-            margin-bottom: 10px;
+            font-size: 3.5em;
+            margin-bottom: 15px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-weight: 700;
         }
         
         .header p {
-            font-size: 1.2em;
+            font-size: 1.3em;
             opacity: 0.9;
+            margin-bottom: 10px;
+        }
+        
+        .header .subtitle {
+            font-size: 1.1em;
+            opacity: 0.8;
+        }
+
+        .header .learn-korean-link {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            margin-top: 15px;
+        }
+
+        .header .learn-korean-link:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
         }
         
         .card {
             background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 30px 0;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        /* Main converter section */
+        .converter-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 30px 0;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .input-group {
+            margin-bottom: 30px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 12px;
+            font-weight: 600;
+            color: #2d3748;
+            font-size: 1.1em;
+        }
+        
+        .name-input {
+            width: 100%;
+            padding: 18px 24px;
+            border: 3px solid #e2e8f0;
             border-radius: 15px;
-            padding: 30px;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .name-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+        }
+        
+        .convert-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 18px 36px;
+            border-radius: 15px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        .convert-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+        
+        .convert-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        /* Results section */
+        .result-section {
+            margin-top: 40px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+        
+        .result-section.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .result-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .korean-result {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+        
+        .korean-result h3 {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+        
+        .korean-name {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 3.5em;
+            font-weight: bold;
             margin: 20px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            line-height: 1.2;
+        }
+        
+        .original-name {
+            font-size: 1.2em;
+            opacity: 0.8;
+            margin-top: 15px;
+        }
+        
+        .pronunciation-guide {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            font-size: 0.95em;
+        }
+        
+        .card-preview {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
         
-        /* 언어 선택 */
-        .language-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            margin: 20px 0;
+        .variations-section {
+            margin-top: 30px;
+            padding: 25px;
+            background: #f8fafc;
+            border-radius: 15px;
         }
         
-        .language-btn {
-            padding: 15px;
+        .variations-title {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 15px;
+        }
+        
+        .variation-options {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .variation-btn {
+            padding: 10px 16px;
+            background: white;
             border: 2px solid #e2e8f0;
             border-radius: 10px;
-            background: white;
             cursor: pointer;
-            text-align: center;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
+            font-size: 0.9em;
         }
         
-        .language-btn:hover {
-            border-color: #667eea;
-            transform: translateY(-2px);
-        }
-        
-        .language-btn.active {
+        .variation-btn:hover {
             border-color: #667eea;
             background: #f7fafc;
         }
         
-        .language-flag {
-            font-size: 2em;
-            margin-bottom: 8px;
+        .variation-btn.active {
+            border-color: #667eea;
+            background: #667eea;
+            color: white;
         }
         
-        /* 샘플 카드 갤러리 */
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+        
+        .download-btn, .share-btn {
+            padding: 16px 32px;
+            border: none;
+            border-radius: 15px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex: 1;
+            max-width: 200px;
+        }
+        
+        .download-btn {
+            background: linear-gradient(45deg, #48bb78, #38a169);
+            color: white;
+            box-shadow: 0 8px 20px rgba(72, 187, 120, 0.3);
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(72, 187, 120, 0.4);
+        }
+        
+        .share-btn {
+            background: linear-gradient(45deg, #ed8936, #dd6b20);
+            color: white;
+            box-shadow: 0 8px 20px rgba(237, 137, 54, 0.3);
+        }
+        
+        .share-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(237, 137, 54, 0.4);
+        }
+        
+        /* Examples section */
         .examples-section {
             background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 30px;
-            margin: 20px 0;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 30px 0;
             backdrop-filter: blur(10px);
             overflow: hidden;
         }
         
         .examples-title {
             font-size: 1.5em;
-            font-weight: bold;
+            font-weight: 700;
             color: white;
             text-align: center;
-            margin-bottom: 15px;
+            margin-bottom: 30px;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
         }
-        
+
         .examples-scroll {
             position: relative;
             height: 120px;
@@ -127,15 +331,20 @@
         
         .example-card {
             min-width: 280px;
-            border-radius: 10px;
-            padding: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            padding: 25px;
             text-align: center;
-            border-left: 4px solid;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
             flex-shrink: 0;
+            border-left: 4px solid;
         }
         
-        /* 10개 카드 각각 다른 스타일 */
+        .example-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Multiple gradient card styles */
         .example-card:nth-child(1) { 
             background: linear-gradient(135deg, #ffeef8 0%, #ffe0f0 100%);
             border-left-color: #ff9dbf;
@@ -168,223 +377,27 @@
             background: linear-gradient(135deg, #e6f9ff 0%, #ccf2ff 100%);
             border-left-color: #66d9ff;
         }
-        .example-card:nth-child(9) { 
-            background: linear-gradient(135deg, #f2ffe6 0%, #e6ffcc 100%);
-            border-left-color: #7aff66;
-        }
-        .example-card:nth-child(10) { 
-            background: linear-gradient(135deg, #fff0e6 0%, #ffe1cc 100%);
-            border-left-color: #ff9966;
-        }
-        
-        .example-original {
-            font-size: 13px;
-            color: #444;
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-        
-        .example-korean {
-            font-size: 15px;
-            font-weight: bold;
-            color: #2d3748;
-        }
         
         @keyframes slideLeft {
             0% {
                 transform: translateX(0);
             }
             100% {
-                transform: translateX(calc(-280px * 10 - 30px * 10));
+                transform: translateX(calc(-280px * 8 - 30px * 8));
             }
         }
         
-        /* 입력 섹션 */
-        .input-section {
-            display: flex;
-            gap: 15px;
-            margin: 30px 0;
-            flex-wrap: wrap;
-        }
-        
-        .input-field {
-            flex: 1;
-            min-width: 250px;
-        }
-        
-        .input-field label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #2d3748;
-        }
-        
-        .input-field input {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
+        .example-original {
             font-size: 16px;
-            transition: border-color 0.2s;
+            color: #4a5568;
+            margin-bottom: 10px;
+            font-weight: 500;
         }
         
-        .input-field input:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-        
-        .convert-btn {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.2s;
-            white-space: nowrap;
-            min-height: 54px;
-        }
-        
-        .convert-btn:hover {
-            transform: translateY(-2px);
-        }
-        
-        /* 결과 섹션 - 반으로 나눈 화면 */
-        .result-display {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin: 30px 0;
-        }
-        
-        .text-result {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 15px;
-            padding: 40px;
-            text-align: center;
-            color: white;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-        
-        .text-result h3 {
-            font-size: 1.2em;
-            margin-bottom: 20px;
-            opacity: 0.9;
-        }
-        
-        .korean-name {
-            font-size: 3em;
+        .example-korean {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 20px;
             font-weight: bold;
-            margin: 20px 0;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-        
-        .original-name {
-            font-size: 1.1em;
-            opacity: 0.8;
-        }
-        
-        .card-result {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-        
-        .action-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin: 30px 0;
-            flex-wrap: wrap;
-        }
-        
-        .download-btn, .share-btn {
-            padding: 15px 30px;
-            border: none;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .download-btn {
-            background: linear-gradient(45deg, #48bb78, #38a169);
-            color: white;
-            box-shadow: 0 5px 15px rgba(72, 187, 120, 0.3);
-        }
-        
-        .download-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(72, 187, 120, 0.4);
-        }
-        
-        .share-btn {
-            background: linear-gradient(45deg, #ed8936, #dd6b20);
-            color: white;
-            box-shadow: 0 5px 15px rgba(237, 137, 54, 0.3);
-        }
-        
-        .share-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(237, 137, 54, 0.4);
-        }
-        
-        /* 공유 팝업 */
-        .share-popup {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-        
-        .share-popup-content {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            max-width: 400px;
-            width: 90%;
-            text-align: center;
-        }
-        
-        .share-url {
-            background: #f7fafc;
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid #e2e8f0;
-            margin: 15px 0;
-            word-break: break-all;
-            font-size: 14px;
-        }
-        
-        .copy-btn, .close-btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            margin: 5px;
-            font-weight: 600;
-        }
-        
-        .copy-btn {
-            background: #667eea;
-            color: white;
-        }
-        
-        .close-btn {
-            background: #e2e8f0;
             color: #2d3748;
         }
         
@@ -396,25 +409,25 @@
             text-align: center;
             color: white;
             opacity: 0.8;
-            margin-top: 50px;
-            padding: 30px;
+            margin-top: 60px;
+            padding: 40px;
         }
         
         .footer p {
-            margin: 5px 0;
+            margin: 8px 0;
         }
         
         .footer-links {
-            margin-top: 20px;
-            padding-top: 20px;
+            margin-top: 25px;
+            padding-top: 25px;
             border-top: 1px solid rgba(255,255,255,0.2);
         }
         
         .footer-links a {
             color: rgba(255,255,255,0.7);
             text-decoration: none;
-            margin: 0 10px;
-            font-size: 0.9em;
+            margin: 0 15px;
+            font-size: 0.95em;
             transition: color 0.3s ease;
         }
         
@@ -422,7 +435,7 @@
             color: white;
         }
         
-        /* 모바일 최적화 */
+        /* Mobile optimization */
         @media (max-width: 768px) {
             .container {
                 padding: 15px;
@@ -432,21 +445,13 @@
                 font-size: 2.5em;
             }
             
-            .input-section {
-                flex-direction: column;
-            }
-            
-            .input-field {
-                min-width: auto;
-            }
-            
-            .result-display {
+            .result-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
             }
             
             .korean-name {
-                font-size: 2em;
+                font-size: 2.5em;
             }
             
             .action-buttons {
@@ -454,10 +459,19 @@
                 align-items: center;
             }
             
-            .language-grid {
-                grid-template-columns: repeat(2, 1fr);
+            .download-btn, .share-btn {
+                max-width: none;
+                width: 100%;
             }
             
+            .card {
+                padding: 25px;
+            }
+            
+            .converter-section {
+                padding: 25px;
+            }
+
             .example-card {
                 min-width: 250px;
             }
@@ -467,138 +481,111 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1 id="siteTitle">✨ Name2Korean</h1>
-            <p id="siteDescription">세계 각국의 이름을 아름다운 한글로 변환하세요</p>
+            <h1>Name2Korean</h1>
+            <p>Convert your English name to beautiful Korean!</p>
+            <p class="subtitle">Perfect for K-pop fans, Korean learners, and cultural enthusiasts</p>
             
-            <div style="margin-top: 20px;">
-                <a href="learn-korean.html" style="display: inline-block; background: rgba(255,255,255,0.2); color: white; text-decoration: none; padding: 12px 24px; border-radius: 25px; transition: all 0.3s ease; font-size: 16px;">
-                    📚 Learn About Korean Alphabet
-                </a>
-            </div>
+            <a href="learn-korean.html" class="learn-korean-link">
+                📚 Learn About Korean Alphabet
+            </a>
         </div>
 
-        <!-- 언어 선택 -->
-        <div class="card">
-            <h3 id="languageTitle">🌍 언어 선택</h3>
-            <div class="language-grid">
-                <div class="language-btn active" onclick="changeLanguage('en')">
-                    <div class="language-flag">🇺🇸</div>
-                    <div>English</div>
-                </div>
-                <div class="language-btn" onclick="changeLanguage('jp')">
-                    <div class="language-flag">🇯🇵</div>
-                    <div>日本語</div>
-                </div>
-                <div class="language-btn" onclick="changeLanguage('cn')">
-                    <div class="language-flag">🇨🇳</div>
-                    <div>中文</div>
-                </div>
-                <div class="language-btn" onclick="changeLanguage('es')">
-                    <div class="language-flag">🇪🇸</div>
-                    <div>Español</div>
-                </div>
-                <div class="language-btn" onclick="changeLanguage('fr')">
-                    <div class="language-flag">🇫🇷</div>
-                    <div>Français</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- 샘플 카드 갤러리 -->
+        <!-- Examples section -->
         <div class="examples-section">
-            <div class="examples-title" id="examplesTitle">✨ 이름이 한글로 변환되는 모습을 확인해보세요</div>
+            <div class="examples-title">See how names transform into Korean</div>
             <div class="examples-scroll">
                 <div class="examples-strip">
                     <div class="example-card">
-                        <div class="example-original">My name is John.</div>
-                        <div class="example-korean">My Korean name is 존!</div>
+                        <div class="example-original">My name is John</div>
+                        <div class="example-korean">My Korean name is 존</div>
                     </div>
                     <div class="example-card">
-                        <div class="example-original">My name is Jane.</div>
-                        <div class="example-korean">My Korean name is 제인!</div>
+                        <div class="example-original">My name is Sarah</div>
+                        <div class="example-korean">My Korean name is 사라</div>
                     </div>
                     <div class="example-card">
-                        <div class="example-original">私の名前はたけしです。</div>
-                        <div class="example-korean">私の韓国名はタケシです!</div>
+                        <div class="example-original">My name is Michael</div>
+                        <div class="example-korean">My Korean name is 마이클</div>
                     </div>
                     <div class="example-card">
-                        <div class="example-original">我叫李华。</div>
-                        <div class="example-korean">我的韩文名字是리화!</div>
+                        <div class="example-original">My name is Emma</div>
+                        <div class="example-korean">My Korean name is 에마</div>
                     </div>
                     <div class="example-card">
-                        <div class="example-original">Mi nombre es María.</div>
-                        <div class="example-korean">Mi nombre coreano es 마리아!</div>
+                        <div class="example-original">My name is David</div>
+                        <div class="example-korean">My Korean name is 데이비드</div>
                     </div>
                     <div class="example-card">
-                        <div class="example-original">Je m'appelle Marie.</div>
-                        <div class="example-korean">Mon nom coréen est 마리!</div>
+                        <div class="example-original">My name is Jessica</div>
+                        <div class="example-korean">My Korean name is 제시카</div>
                     </div>
                     <div class="example-card">
-                        <div class="example-original">My name is Sarah.</div>
-                        <div class="example-korean">My Korean name is 사라!</div>
+                        <div class="example-original">My name is Christopher</div>
+                        <div class="example-korean">My Korean name is 크리스토퍼</div>
                     </div>
                     <div class="example-card">
-                        <div class="example-original">私の名前はゆきです。</div>
-                        <div class="example-korean">私の韓国名は유키です!</div>
-                    </div>
-                    <div class="example-card">
-                        <div class="example-original">我叫王明。</div>
-                        <div class="example-korean">我的韩文名字是왕명!</div>
-                    </div>
-                    <div class="example-card">
-                        <div class="example-original">Mi nombre es Carlos.</div>
-                        <div class="example-korean">Mi nombre coreano es 카를로스!</div>
+                        <div class="example-original">My name is Jennifer</div>
+                        <div class="example-korean">My Korean name is 제니퍼</div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- 이름 입력 -->
-        <div class="card">
-            <h3 id="convertTitle">🔄 이름 변환</h3>
-            <div class="input-section">
-                <div class="input-field">
-                    <label for="nameInput" id="inputLabel">Your name:</label>
-                    <input type="text" id="nameInput" placeholder="e.g., John, Sarah, Michael..." />
-                </div>
-                <button class="convert-btn" onclick="convertName()" id="convertBtn">
-                    🔄 Convert to Korean
-                </button>
-            </div>
-        </div>
-
-        <!-- 결과 섹션 (반으로 나눈 화면) -->
-        <div class="card hidden" id="resultSection">
-            <h3 id="resultTitle">✅ 변환 결과</h3>
-            <div class="result-display">
-                <!-- 왼쪽: 텍스트 결과 -->
-                <div class="text-result">
-                    <h3 id="resultLabel">🎉 당신의 한국 이름</h3>
-                    <div class="korean-name" id="koreanNameText"></div>
-                    <div class="original-name" id="originalNameText"></div>
-                </div>
-                
-                <!-- 오른쪽: 카드 결과 -->
-                <div class="card-result">
-                    <canvas id="nameCard" width="400" height="300" style="max-width: 100%; height: auto; border-radius: 10px;"></canvas>
-                </div>
+        <!-- Main converter -->
+        <div class="converter-section">
+            <h2 style="text-align: center; margin-bottom: 30px; color: #2d3748; font-size: 1.8em;">Convert Your Name</h2>
+            
+            <div class="input-group">
+                <label for="nameInput">Enter your English name:</label>
+                <input type="text" id="nameInput" class="name-input" 
+                       placeholder="e.g., John, Sarah, Michael, Emma..." 
+                       autocomplete="off" />
             </div>
             
-            <!-- 액션 버튼들 -->
-            <div class="action-buttons">
-                <button class="download-btn" onclick="downloadCard()" id="downloadBtn">
-                    📥 Download Image
-                </button>
-                <button class="share-btn" onclick="showSharePopup()" id="shareBtn">
-                    🔗 Share with Friends
-                </button>
+            <button class="convert-btn" onclick="convertName()" id="convertBtn">
+                🔄 Convert to Korean
+            </button>
+            
+            <!-- Results section -->
+            <div class="result-section hidden" id="resultSection">
+                <h3 style="text-align: center; color: #2d3748; margin-bottom: 20px;">Your Korean Name</h3>
+                
+                <div class="result-grid">
+                    <div class="korean-result">
+                        <h3>🎉 Korean Name</h3>
+                        <div class="korean-name" id="koreanNameText"></div>
+                        <div class="original-name" id="originalNameText"></div>
+                        <div class="pronunciation-guide" id="pronunciationGuide"></div>
+                    </div>
+                    
+                    <div class="card-preview">
+                        <canvas id="nameCard" width="350" height="250" style="max-width: 100%; height: auto; border-radius: 15px;"></canvas>
+                    </div>
+                </div>
+                
+                <!-- Variations -->
+                <div class="variations-section" id="variationsSection">
+                    <div class="variations-title">Alternative styles:</div>
+                    <div class="variation-options" id="variationOptions">
+                        <!-- Dynamically populated -->
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="download-btn" onclick="downloadCard()">
+                        📥 Download Image
+                    </button>
+                    <button class="share-btn" onclick="shareResult()">
+                        🔗 Share Result
+                    </button>
+                </div>
             </div>
         </div>
 
         <div class="footer">
-            <p>🌟 Convert names from around the world to beautiful Korean!</p>
-            <p>🎯 Perfect for K-pop fans, Korean learners, and cultural enthusiasts</p>
-            <p>💡 Automatic conversion may not be 100% accurate</p>
+            <p>🌟 Convert English names to beautiful Korean characters</p>
+            <p>🎯 Based on Korean phonetic principles and cultural naming conventions</p>
+            <p>💡 Results are approximations - Korean pronunciation may vary</p>
             
             <div class="footer-links">
                 <a href="privacy.html">Privacy Policy</a>
@@ -609,647 +596,315 @@
         </div>
     </div>
 
-    <!-- 공유 팝업 -->
-    <div class="share-popup" id="sharePopup">
-        <div class="share-popup-content">
-            <h3>🔗 친구들과 공유하기</h3>
-            <p>아래 링크를 복사해서 친구들에게 공유해보세요!</p>
-            <div class="share-url" id="shareUrl"></div>
-            <div>
-                <button class="copy-btn" onclick="copyShareUrl()">📋 Copy Link</button>
-                <button class="close-btn" onclick="hideSharePopup()">❌ Close</button>
-            </div>
-        </div>
-    </div>
-
     <script>
-        // 한글 음절 조합 시스템
-        class KoreanSyllableComposer {
+        // Enhanced Korean name converter (완전한 englishonly.html 버전)
+        class EnhancedKoreanConverter {
             constructor() {
-                // 한글 자모 유니코드 정보
-                this.HANGUL_BASE = 0xAC00;
-                this.INITIAL_COUNT = 19;
-                this.VOWEL_COUNT = 21;
-                this.FINAL_COUNT = 28;
-                
-                // 초성 (자음)
-                this.initials = [
-                    'ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ', 
-                    'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ'
-                ];
-                
-                // 중성 (모음)
-                this.vowels = [
-                    'ㅏ', 'ㅐ', 'ㅑ', 'ㅒ', 'ㅓ', 'ㅔ', 'ㅕ', 'ㅖ', 'ㅗ', 'ㅘ',
-                    'ㅙ', 'ㅚ', 'ㅛ', 'ㅜ', 'ㅝ', 'ㅞ', 'ㅟ', 'ㅠ', 'ㅡ', 'ㅢ', 'ㅣ'
-                ];
-                
-                // 종성 (받침)
-                this.finals = [
-                    '', 'ㄱ', 'ㄲ', 'ㄳ', 'ㄴ', 'ㄵ', 'ㄶ', 'ㄷ', 'ㄹ', 'ㄺ',
-                    'ㄻ', 'ㄼ', 'ㄽ', 'ㄾ', 'ㄿ', 'ㅀ', 'ㅁ', 'ㅂ', 'ㅄ', 'ㅅ',
-                    'ㅆ', 'ㅇ', 'ㅈ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ'
-                ];
+                this.initializeConverter();
             }
             
-            // 개별 자모를 완성된 한글 음절로 조합
-            compose(initial, vowel, final = '') {
-                const initialIndex = this.initials.indexOf(initial);
-                const vowelIndex = this.vowels.indexOf(vowel);
-                const finalIndex = this.finals.indexOf(final);
-                
-                if (initialIndex === -1 || vowelIndex === -1 || finalIndex === -1) {
-                    return initial + vowel + final; // 조합 실패시 그대로 반환
-                }
-                
-                const syllableCode = this.HANGUL_BASE + 
-                    (initialIndex * this.VOWEL_COUNT * this.FINAL_COUNT) +
-                    (vowelIndex * this.FINAL_COUNT) +
-                    finalIndex;
-                    
-                return String.fromCharCode(syllableCode);
-            }
-        }
-
-        // 개선된 영어-한글 변환기
-        class ImprovedEnglishToKoreanConverter {
-            constructor() {
-                this.syllableComposer = new KoreanSyllableComposer();
-                
-                // 영어 자음 -> 한글 자음 매핑
-                this.consonantMap = {
-                    'b': 'ㅂ', 'p': 'ㅍ', 'd': 'ㄷ', 't': 'ㅌ',
-                    'g': 'ㄱ', 'k': 'ㅋ', 'f': 'ㅍ', 'v': 'ㅂ',
-                    's': 'ㅅ', 'z': 'ㅈ', 'h': 'ㅎ', 'j': 'ㅈ',
-                    'm': 'ㅁ', 'n': 'ㄴ', 'l': 'ㄹ', 'r': 'ㄹ',
-                    'w': 'ㅜ', 'y': 'ㅣ', 'c': 'ㅋ'
-                };
-
-                // 개선된 모음 매핑
-                this.vowelMap = {
-                    'a': 'ㅏ',   
-                    'e': 'ㅔ',   
-                    'i': 'ㅣ',   
-                    'o': 'ㅗ',   
-                    'u': 'ㅜ'    
-                };
-
-                // 정확한 영어 이름 사전
+            initializeConverter() {
+                // Comprehensive English name dictionary with multiple variations
                 this.nameDict = {
-                    'aaron': '아론', 'adam': '아담', 'adrian': '아드리안', 'alan': '알란',
-                    'albert': '알버트', 'alex': '알렉스', 'alexander': '알렉산더', 'andrew': '앤드류',
-                    'anthony': '앤서니', 'arthur': '아서', 'austin': '오스틴', 'benjamin': '벤자민',
-                    'brian': '브라이언', 'bruce': '브루스', 'bryan': '브라이언', 'carl': '칼',
-                    'charles': '찰스', 'chris': '크리스', 'christopher': '크리스토퍼', 'craig': '크레이그',
-                    'daniel': '다니엘', 'david': '데이비드', 'dennis': '데니스', 'douglas': '더글라스',
-                    'edward': '에드워드', 'eric': '에릭', 'eugene': '유진', 'frank': '프랭크',
-                    'gary': '게리', 'george': '조지', 'gerald': '제럴드', 'harold': '해럴드',
-                    'henry': '헨리', 'howard': '하워드', 'jack': '잭', 'james': '제임스',
-                    'jason': '제이슨', 'jeffrey': '제프리', 'jeremy': '제레미', 'jerry': '제리',
-                    'jesse': '제시', 'jimmy': '지미', 'john': '존', 'jon': '존', 'jonathan': '조나단',
-                    'jordan': '조던', 'joseph': '조제프', 'joshua': '조슈아', 'justin': '저스틴',
-                    'keith': '키스', 'kenneth': '케네스', 'kevin': '케빈', 'kyle': '카일',
-                    'larry': '래리', 'lawrence': '로렌스', 'louis': '루이스', 'mark': '마크',
-                    'martin': '마틴', 'matthew': '매튜', 'michael': '마이클', 'nicholas': '니콜라스',
-                    'patrick': '패트릭', 'paul': '폴', 'peter': '피터', 'philip': '필립',
-                    'raymond': '레이먼드', 'richard': '리처드', 'robert': '로버트', 'ronald': '로날드',
-                    'ryan': '라이언', 'samuel': '사무엘', 'scott': '스콧', 'sean': '숀',
-                    'stephen': '스티븐', 'steven': '스티븐', 'thomas': '토마스', 'timothy': '티모시',
-                    'todd': '토드', 'victor': '빅터', 'walter': '월터', 'william': '윌리엄',
+                    // Male names
+                    'aaron': ['아론', '에런'], 'adam': ['아담'], 'adrian': ['아드리안', '에이드리언'],
+                    'alan': ['앨런', '알란'], 'albert': ['알버트'], 'alex': ['알렉스'], 
+                    'alexander': ['알렉산더'], 'andrew': ['앤드류'], 'anthony': ['앤서니'],
+                    'arthur': ['아서'], 'austin': ['오스틴'], 'benjamin': ['벤자민'],
+                    'brian': ['브라이언'], 'bruce': ['브루스'], 'bryan': ['브라이언'],
+                    'carl': ['칼'], 'charles': ['찰스'], 'chris': ['크리스'],
+                    'christopher': ['크리스토퍼'], 'craig': ['크레이그'], 'daniel': ['다니엘'],
+                    'david': ['데이비드'], 'dennis': ['데니스'], 'douglas': ['더글라스'],
+                    'edward': ['에드워드'], 'eric': ['에릭'], 'eugene': ['유진'],
+                    'frank': ['프랭크'], 'gary': ['게리'], 'george': ['조지'],
+                    'gerald': ['제럴드'], 'harold': ['해럴드'], 'henry': ['헨리'],
+                    'howard': ['하워드'], 'jack': ['잭'], 'james': ['제임스'],
+                    'jason': ['제이슨'], 'jeffrey': ['제프리'], 'jeremy': ['제레미'],
+                    'jerry': ['제리'], 'jesse': ['제시'], 'jimmy': ['지미'],
+                    'john': ['존'], 'jon': ['존'], 'jonathan': ['조나단'],
+                    'jordan': ['조던'], 'joseph': ['조셉'], 'joshua': ['조슈아'],
+                    'justin': ['저스틴'], 'keith': ['키스'], 'kenneth': ['케네스'],
+                    'kevin': ['케빈'], 'kyle': ['카일'], 'larry': ['래리'],
+                    'lawrence': ['로렌스'], 'louis': ['루이스'], 'mark': ['마크'],
+                    'martin': ['마틴'], 'matthew': ['매튜'], 'michael': ['마이클'],
+                    'nicholas': ['니콜라스'], 'patrick': ['패트릭'], 'paul': ['폴'],
+                    'peter': ['피터'], 'philip': ['필립'], 'raymond': ['레이먼드'],
+                    'richard': ['리처드'], 'robert': ['로버트'], 'ronald': ['로날드'],
+                    'ryan': ['라이언'], 'samuel': ['사무엘'], 'scott': ['스콧'],
+                    'sean': ['숀'], 'stephen': ['스티븐'], 'steven': ['스티븐'],
+                    'thomas': ['토마스'], 'timothy': ['티모시'], 'todd': ['토드'],
+                    'victor': ['빅터'], 'walter': ['월터'], 'william': ['윌리엄'],
                     
-                    // 문제된 이름들 정확히 추가
-                    'casey': '케이시', 'riley': '라일리', 'sam': '샘', 'taylor': '테일러',
-                    
-                    // 여성 이름들
-                    'amanda': '아만다', 'amy': '에이미', 'andrea': '안드레아', 'angela': '안젤라',
-                    'anna': '안나', 'ashley': '애슐리', 'barbara': '바바라', 'betty': '베티',
-                    'brenda': '브렌다', 'carol': '캐롤', 'carolyn': '캐롤린', 'catherine': '캐서린',
-                    'cheryl': '셰릴', 'christina': '크리스티나', 'christine': '크리스틴', 'cynthia': '신시아',
-                    'deborah': '데보라', 'diana': '다이애나', 'donna': '도나', 'dorothy': '도로시',
-                    'elizabeth': '엘리자베스', 'emily': '에밀리', 'emma': '에마', 'helen': '헬렌',
-                    'jacqueline': '재클린', 'jane': '제인', 'janet': '자넷', 'jennifer': '제니퍼',
-                    'jessica': '제시카', 'joan': '조안', 'judith': '주디스', 'judy': '주디',
-                    'julia': '줄리아', 'julie': '줄리', 'karen': '카렌', 'katherine': '캐서린',
-                    'kathy': '캐시', 'kelly': '켈리', 'kimberly': '킴벌리', 'laura': '로라',
-                    'linda': '린다', 'lisa': '리사', 'lori': '로리', 'margaret': '마가렛',
-                    'maria': '마리아', 'marie': '마리', 'marilyn': '마릴린', 'martha': '마사',
-                    'mary': '메리', 'melissa': '멜리사', 'michelle': '미셸', 'nancy': '낸시',
-                    'nicole': '니콜', 'pamela': '파멜라', 'patricia': '패트리샤', 'rebecca': '레베카',
-                    'ruth': '루스', 'sandra': '산드라', 'sarah': '사라', 'sharon': '샤론',
-                    'stephanie': '스테파니', 'susan': '수잔', 'teresa': '테레사', 'theresa': '테레사',
-                    'virginia': '버지니아', 'wendy': '웬디'
+                    // Female names
+                    'amanda': ['아만다'], 'amy': ['에이미'], 'andrea': ['안드레아'],
+                    'angela': ['안젤라'], 'anna': ['안나'], 'ashley': ['애슐리'],
+                    'barbara': ['바바라'], 'betty': ['베티'], 'brenda': ['브렌다'],
+                    'carol': ['캐롤'], 'carolyn': ['캐롤린'], 'catherine': ['캐서린'],
+                    'cheryl': ['셰릴'], 'christina': ['크리스티나'], 'christine': ['크리스틴'],
+                    'cynthia': ['신시아'], 'deborah': ['데보라'], 'diana': ['다이애나'],
+                    'donna': ['도나'], 'dorothy': ['도로시'], 'elizabeth': ['엘리자베스'],
+                    'emily': ['에밀리'], 'emma': ['에마'], 'helen': ['헬렌'],
+                    'jacqueline': ['재클린'], 'jane': ['제인'], 'janet': ['자넷'],
+                    'jennifer': ['제니퍼'], 'jessica': ['제시카'], 'joan': ['조안'],
+                    'judith': ['주디스'], 'judy': ['주디'], 'julia': ['줄리아'],
+                    'julie': ['줄리'], 'karen': ['카렌'], 'katherine': ['캐서린'],
+                    'kathy': ['캐시'], 'kelly': ['켈리'], 'kimberly': ['킴벌리'],
+                    'laura': ['로라'], 'linda': ['린다'], 'lisa': ['리사'],
+                    'lori': ['로리'], 'margaret': ['마가렛'], 'maria': ['마리아'],
+                    'marie': ['마리'], 'marilyn': ['마릴린'], 'martha': ['마사'],
+                    'mary': ['메리'], 'melissa': ['멜리사'], 'michelle': ['미셸'],
+                    'nancy': ['낸시'], 'nicole': ['니콜'], 'pamela': ['파멜라'],
+                    'patricia': ['패트리샤'], 'rebecca': ['레베카'], 'ruth': ['루스'],
+                    'sandra': ['산드라'], 'sarah': ['사라'], 'sharon': ['샤론'],
+                    'stephanie': ['스테파니'], 'susan': ['수잔'], 'teresa': ['테레사'],
+                    'theresa': ['테레사'], 'virginia': ['버지니아'], 'wendy': ['웬디']
                 };
-
-                // 특수 조합 처리
-                this.specialCombinations = {
-                    'ay': '에이',   // Taylor, Casey
-                    'ey': '이',     // Riley  
-                    'er': '어',     // Taylor
-                    'or': '오',
-                    'ar': '아',
-                    'ir': '어',
-                    'ur': '어',
-                    'ch': '치',
-                    'sh': '쉬',
-                    'th': '스',
-                    'ph': '프',
-                    'ck': '크',
-                    'ng': 'ㅇ',
-                    'ly': '리',     // Riley
-                    'ry': '리'      // 끝나는 ry
+                
+                // Pronunciation patterns
+                this.pronunciationGuide = {
+                    'aaron': 'AH-ron', 'adam': 'AD-am', 'alex': 'AL-ex',
+                    'brian': 'BRY-an', 'david': 'DAY-vid', 'emily': 'EM-i-lee',
+                    'john': 'JOHN', 'sarah': 'SAIR-ah', 'michael': 'MY-kel',
+                    'emma': 'EM-ah', 'jessica': 'JES-i-ka', 'christopher': 'KRIS-to-fer',
+                    'jennifer': 'JEN-i-fer'
                 };
             }
-
-            // 메인 변환 함수
-            convert(englishName) {
-                const cleanName = englishName.toLowerCase().trim();
+            
+            convert(name) {
+                const cleanName = name.toLowerCase().trim();
                 
-                // 사전에 있는 이름이면 바로 반환
                 if (this.nameDict[cleanName]) {
-                    return this.nameDict[cleanName];
+                    return {
+                        korean: this.nameDict[cleanName][0],
+                        alternatives: this.nameDict[cleanName],
+                        pronunciation: this.pronunciationGuide[cleanName] || this.generatePronunciation(name),
+                        confidence: 'high'
+                    };
                 }
                 
-                // 발음 기반 변환
-                return this.advancedPhoneticConvert(cleanName);
-            }
-
-            // 개선된 발음 기반 변환
-            advancedPhoneticConvert(name) {
-                let result = '';
-                let i = 0;
-                
-                while (i < name.length) {
-                    let found = false;
-                    
-                    // 특수 조합 먼저 확인 (긴 것부터)
-                    for (let len = 3; len >= 2; len--) {
-                        if (i + len <= name.length) {
-                            const substr = name.substring(i, i + len);
-                            
-                            if (this.specialCombinations[substr]) {
-                                result += this.specialCombinations[substr];
-                                i += len;
-                                found = true;
-                                break;
-                            }
-                        }
-                    }
-                    
-                    // 특수 조합이 없으면 음절 단위로 처리
-                    if (!found) {
-                        const syllable = this.extractSyllable(name, i);
-                        result += this.convertSyllableToKorean(syllable.text);
-                        i += syllable.length;
-                    }
-                }
-                
-                return result || name;
-            }
-
-            // 음절 추출
-            extractSyllable(name, startIndex) {
-                let syllable = '';
-                let i = startIndex;
-                
-                // 자음으로 시작
-                while (i < name.length && !this.isVowel(name[i])) {
-                    syllable += name[i];
-                    i++;
-                }
-                
-                // 모음 추가
-                if (i < name.length && this.isVowel(name[i])) {
-                    syllable += name[i];
-                    i++;
-                }
-                
-                // 종성 자음 (하나만)
-                if (i < name.length && !this.isVowel(name[i])) {
-                    // 다음이 모음이면 현재 자음은 다음 음절로
-                    if (i + 1 < name.length && this.isVowel(name[i + 1])) {
-                        // 현재 자음은 다음 음절의 초성
-                    } else {
-                        syllable += name[i];
-                        i++;
-                    }
-                }
-                
+                // Fallback to phonetic conversion
+                const phoneticResult = this.phoneticConvert(cleanName);
                 return {
-                    text: syllable,
-                    length: i - startIndex
+                    korean: phoneticResult,
+                    alternatives: [phoneticResult],
+                    pronunciation: this.generatePronunciation(name),
+                    confidence: 'medium'
                 };
             }
-
-            // 개별 음절을 한글로 변환
-            convertSyllableToKorean(syllable) {
-                if (!syllable) return '';
+            
+            phoneticConvert(name) {
+                // Simplified phonetic conversion for unknown names
+                const vowelMap = { 'a': '아', 'e': '에', 'i': '이', 'o': '오', 'u': '우' };
+                const consonantMap = { 
+                    'b': 'ㅂ', 'c': 'ㅋ', 'd': 'ㄷ', 'f': 'ㅍ', 'g': 'ㄱ',
+                    'h': 'ㅎ', 'j': 'ㅈ', 'k': 'ㅋ', 'l': 'ㄹ', 'm': 'ㅁ',
+                    'n': 'ㄴ', 'p': 'ㅍ', 'r': 'ㄹ', 's': 'ㅅ', 't': 'ㅌ',
+                    'v': 'ㅂ', 'w': '우', 'x': 'ㅅ', 'y': '이', 'z': 'ㅈ'
+                };
                 
-                let initial = 'ㅇ';
-                let vowel = 'ㅡ';
-                let final = '';
-                
-                let i = 0;
-                
-                // 초성
-                if (i < syllable.length && !this.isVowel(syllable[i])) {
-                    initial = this.consonantMap[syllable[i]] || 'ㅇ';
-                    i++;
-                }
-                
-                // 중성
-                if (i < syllable.length && this.isVowel(syllable[i])) {
-                    vowel = this.vowelMap[syllable[i]] || 'ㅡ';
-                    i++;
-                }
-                
-                // 종성
-                if (i < syllable.length && !this.isVowel(syllable[i])) {
-                    final = this.consonantMap[syllable[i]] || '';
-                }
-                
-                // 안전한 한글 조합
-                try {
-                    return this.syllableComposer.compose(initial, vowel, final);
-                } catch (error) {
-                    // 조합 실패시 단순 연결
-                    return initial + vowel + final;
-                }
+                return name.split('').map(char => {
+                    if (vowelMap[char]) return vowelMap[char];
+                    if (consonantMap[char]) return consonantMap[char];
+                    return char;
+                }).join('');
             }
-
-            isVowel(char) {
-                return 'aeiou'.includes(char);
+            
+            generatePronunciation(name) {
+                // Simple pronunciation guide generator
+                return name.toUpperCase().split('').join('-');
             }
         }
-
-        // 다른 언어들을 위한 기본 변환기
-        function convertToKoreanOtherLanguages(name, language) {
-            const basicMap = {
-                'a': '아', 'e': '에', 'i': '이', 'o': '오', 'u': '우',
-                'b': 'ㅂ', 'c': 'ㅋ', 'd': 'ㄷ', 'f': 'ㅍ', 'g': 'ㄱ',
-                'h': 'ㅎ', 'j': 'ㅈ', 'k': 'ㅋ', 'l': 'ㄹ', 'm': 'ㅁ',
-                'n': 'ㄴ', 'p': 'ㅍ', 'q': 'ㅋ', 'r': 'ㄹ', 's': 'ㅅ',
-                't': 'ㅌ', 'v': 'ㅂ', 'w': 'ㅜ', 'x': 'ㅅ', 'y': 'ㅣ', 'z': 'ㅈ'
-            };
-            
-            return name.toLowerCase().split('').map(char => {
-                return basicMap[char] || char;
-            }).join('');
-        }
-
-        // 전역 변수들
-        let currentLanguage = 'en';
-        let currentOriginalName = '';
-        let currentKoreanName = '';
-        const englishConverter = new ImprovedEnglishToKoreanConverter();
-
-        // 언어별 텍스트 번역
-        const translations = {
-            'en': {
-                siteTitle: '✨ Name2Korean',
-                siteDescription: 'Convert names from around the world to beautiful Korean!',
-                examplesTitle: '✨ See how names transform into Korean',
-                languageTitle: '🌍 Language Selection', 
-                convertTitle: '🔄 Name Conversion',
-                inputLabel: 'Your name:',
-                placeholder: 'e.g., John, Sarah, Michael...',
-                convertBtn: '🔄 Convert to Korean',
-                resultTitle: '✅ Conversion Result',
-                resultLabel: '🎉 Your Korean Name',
-                downloadBtn: '📥 Download Image',
-                shareBtn: '🔗 Share with Friends'
-            },
-            'jp': {
-                siteTitle: '✨ 名前を韓国語に',
-                siteDescription: '世界中の名前を美しい韓国語に変換！',
-                examplesTitle: '✨ 名前がハングルに変換される様子をご確認ください',
-                languageTitle: '🌍 言語選択',
-                convertTitle: '🔄 名前変換', 
-                inputLabel: 'あなたの名前：',
-                placeholder: '例: たけし, ゆき, あきら...',
-                convertBtn: '🔄 ハングルに変換',
-                resultTitle: '✅ 変換結果',
-                resultLabel: '🎉 あなたの韓国名',
-                downloadBtn: '📥 画像をダウンロード',
-                shareBtn: '🔗 友達とシェア'
-            },
-            'cn': {
-                siteTitle: '✨ 名字转韩文', 
-                siteDescription: '将世界各地的名字转换为美丽的韩文！',
-                examplesTitle: '✨ 确认名字转换为韩文的样子',
-                languageTitle: '🌍 语言选择',
-                convertTitle: '🔄 名字转换',
-                inputLabel: '你的名字：',
-                placeholder: '例: 王明, 李华, 张伟...',
-                convertBtn: '🔄 转换为韩文',
-                resultTitle: '✅ 转换结果', 
-                resultLabel: '🎉 你的韩文名字',
-                downloadBtn: '📥 下载图片',
-                shareBtn: '🔗 与朋友分享'
-            },
-            'es': {
-                siteTitle: '✨ Nombre a Coreano',
-                siteDescription: '¡Convierte nombres de todo el mundo a hermoso coreano!',
-                examplesTitle: '✨ Confirma cómo los nombres se convierten al coreano',
-                languageTitle: '🌍 Selección de idioma',
-                convertTitle: '🔄 Conversión de nombres',
-                inputLabel: 'Tu nombre:',
-                placeholder: 'ej: María, José, Juan...',
-                convertBtn: '🔄 Convertir al coreano',
-                resultTitle: '✅ Resultado de conversión',
-                resultLabel: '🎉 Tu nombre coreano',
-                downloadBtn: '📥 Descargar imagen',
-                shareBtn: '🔗 Compartir con amigos'
-            },
-            'fr': {
-                siteTitle: '✨ Nom en Coréen',
-                siteDescription: 'Convertissez des noms du monde entier en coréen magnifique !',
-                examplesTitle: '✨ Confirmez comment les noms se convertissent en coréen',
-                languageTitle: '🌍 Sélection de langue',
-                convertTitle: '🔄 Conversion de noms',
-                inputLabel: 'Votre nom :',
-                placeholder: 'ex: Pierre, Marie, Jean...',
-                convertBtn: '🔄 Convertir en coréen',
-                resultTitle: '✅ Résultat de conversion',
-                resultLabel: '🎉 Votre nom en coréen',
-                downloadBtn: '📥 Télécharger l\'image',
-                shareBtn: '🔗 Partager avec des amis'
-            }
-        };
-
-        // 언어 변경 함수
-        function changeLanguage(lang) {
-            currentLanguage = lang;
-            
-            // 활성 언어 버튼 업데이트
-            document.querySelectorAll('.language-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.closest('.language-btn').classList.add('active');
-
-            const t = translations[lang] || translations['en'];
-            
-            // 텍스트 업데이트
-            document.getElementById('siteTitle').textContent = t.siteTitle;
-            document.getElementById('siteDescription').textContent = t.siteDescription;
-            document.getElementById('examplesTitle').textContent = t.examplesTitle;
-            document.getElementById('languageTitle').textContent = t.languageTitle;
-            document.getElementById('convertTitle').textContent = t.convertTitle;
-            document.getElementById('inputLabel').textContent = t.inputLabel;
-            document.getElementById('nameInput').placeholder = t.placeholder;
-            document.getElementById('convertBtn').textContent = t.convertBtn;
-            
-            // 결과 섹션이 보이는 경우에만 업데이트
-            if (!document.getElementById('resultSection').classList.contains('hidden')) {
-                document.getElementById('resultTitle').textContent = t.resultTitle;
-                document.getElementById('resultLabel').textContent = t.resultLabel;
-                document.getElementById('downloadBtn').textContent = t.downloadBtn;
-                document.getElementById('shareBtn').textContent = t.shareBtn;
-            }
-        }
-
-        // 개선된 한글 변환 함수 (언어별 처리)
-        function convertToKorean(name, language) {
-            switch(language) {
-                case 'en':
-                    return englishConverter.convert(name);
-                case 'jp':
-                    return convertJapaneseName(name);
-                case 'cn':
-                    return convertChineseName(name);
-                case 'es':
-                    return convertSpanishName(name);
-                case 'fr':
-                    return convertFrenchName(name);
-                default:
-                    return englishConverter.convert(name);
-            }
-        }
-
-        // 일본어 이름 변환
-        function convertJapaneseName(name) {
-            const japaneseMap = {
-                'takeshi': '타케시', 'yuki': '유키', 'akira': '아키라',
-                'hiroshi': '히로시', 'satoshi': '사토시', 'kenji': '켄지',
-                'sakura': '사쿠라', 'mai': '마이',
-                'ai': '아이', 'rei': '레이', 'miku': '미쿠'
-            };
-            
-            const lowerName = name.toLowerCase();
-            return japaneseMap[lowerName] || convertToKoreanOtherLanguages(name, 'jp');
-        }
-
-        // 중국어 이름 변환
-        function convertChineseName(name) {
-            const chineseMap = {
-                'wang': '왕', 'li': '리', 'zhang': '장',
-                'liu': '류', 'chen': '첸', 'yang': '양',
-                'huang': '황', 'zhao': '조', 'wu': '우',
-                'ming': '명', 'wei': '웨이', 'lei': '레이',
-                'hua': '화', 'juan': '주안', 'yan': '얀'
-            };
-            
-            const lowerName = name.toLowerCase();
-            return chineseMap[lowerName] || convertToKoreanOtherLanguages(name, 'cn');
-        }
-
-        // 스페인어 이름 변환
-        function convertSpanishName(name) {
-            const spanishMap = {
-                'maria': '마리아', 'jose': '호세', 'juan': '후안',
-                'antonio': '안토니오', 'francisco': '프란시스코', 'manuel': '마누엘',
-                'ana': '아나', 'carmen': '카르멘', 'dolores': '돌로레스',
-                'carlos': '카를로스', 'miguel': '미구엘', 'rafael': '라파엘'
-            };
-            
-            const lowerName = name.toLowerCase();
-            return spanishMap[lowerName] || convertToKoreanOtherLanguages(name, 'es');
-        }
-
-        // 프랑스어 이름 변환
-        function convertFrenchName(name) {
-            const frenchMap = {
-                'pierre': '피에르', 'marie': '마리', 'jean': '장',
-                'michel': '미셸', 'philippe': '필립', 'alain': '알랑',
-                'bernard': '베르나르', 'christophe': '크리스토프', 'laurent': '로랑',
-                'nathalie': '나탈리', 'isabelle': '이자벨', 'sylvie': '실비'
-            };
-            
-            const lowerName = name.toLowerCase();
-            return frenchMap[lowerName] || convertToKoreanOtherLanguages(name, 'fr');
-        }
-
-        // 이름 변환 함수 (메인)
+        
+        // Global variables
+        let converter = new EnhancedKoreanConverter();
+        let currentResult = null;
+        
+        // Main conversion function
         function convertName() {
             const input = document.getElementById('nameInput').value.trim();
             if (!input) {
                 alert('Please enter a name!');
                 return;
             }
-
-            currentOriginalName = input;
-            currentKoreanName = convertToKorean(input, currentLanguage);
             
-            // 결과 표시
+            currentResult = converter.convert(input);
+            currentResult.originalName = input;
+            
             showResult();
         }
-
-        // 결과 표시 함수
+        
+        // Display results
         function showResult() {
-            // 텍스트 결과 업데이트
-            document.getElementById('koreanNameText').textContent = currentKoreanName;
-            document.getElementById('originalNameText').textContent = `← ${currentOriginalName}`;
+            const resultSection = document.getElementById('resultSection');
+            const koreanNameText = document.getElementById('koreanNameText');
+            const originalNameText = document.getElementById('originalNameText');
+            const pronunciationGuide = document.getElementById('pronunciationGuide');
             
-            // 카드 그리기
+            // Update text
+            koreanNameText.textContent = currentResult.korean;
+            originalNameText.textContent = `← ${currentResult.originalName}`;
+            pronunciationGuide.textContent = `Pronunciation: ${currentResult.pronunciation}`;
+            
+            // Show alternatives if available
+            if (currentResult.alternatives.length > 1) {
+                showVariations();
+            } else {
+                document.getElementById('variationsSection').style.display = 'none';
+            }
+            
+            // Draw card
             drawNameCard();
             
-            // 결과 섹션 표시
-            document.getElementById('resultSection').classList.remove('hidden');
+            // Show result section with animation
+            resultSection.classList.remove('hidden');
+            setTimeout(() => {
+                resultSection.classList.add('show');
+            }, 100);
+        }
+        
+        // Show alternative name variations
+        function showVariations() {
+            const variationsSection = document.getElementById('variationsSection');
+            const variationOptions = document.getElementById('variationOptions');
             
-            // 버튼 텍스트 업데이트
-            const t = translations[currentLanguage] || translations['en'];
-            document.getElementById('resultTitle').textContent = t.resultTitle;
-            document.getElementById('resultLabel').textContent = t.resultLabel;
-            document.getElementById('downloadBtn').textContent = t.downloadBtn;
-            document.getElementById('shareBtn').textContent = t.shareBtn;
+            variationOptions.innerHTML = '';
+            
+            currentResult.alternatives.forEach((variation, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'variation-btn';
+                btn.textContent = variation;
+                if (index === 0) btn.classList.add('active');
+                
+                btn.addEventListener('click', () => {
+                    currentResult.korean = variation;
+                    document.getElementById('koreanNameText').textContent = variation;
+                    
+                    // Update active button
+                    document.querySelectorAll('.variation-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    
+                    drawNameCard();
+                });
+                
+                variationOptions.appendChild(btn);
+            });
+            
+            variationsSection.style.display = 'block';
         }
-
-        // Canvas roundRect 폴리필
-        if (!CanvasRenderingContext2D.prototype.roundRect) {
-            CanvasRenderingContext2D.prototype.roundRect = function(x, y, width, height, radius) {
-                this.beginPath();
-                this.moveTo(x + radius, y);
-                this.lineTo(x + width - radius, y);
-                this.quadraticCurveTo(x + width, y, x + width, y + radius);
-                this.lineTo(x + width, y + height - radius);
-                this.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
-                this.lineTo(x + radius, y + height);
-                this.quadraticCurveTo(x, y + height, x, y + height - radius);
-                this.lineTo(x, y + radius);
-                this.quadraticCurveTo(x, y, x + radius, y);
-                this.closePath();
-            };
-        }
-
-        // 카드 그리기 함수
+        
+        // Enhanced card drawing (원본 englishonly.html 스타일)
         function drawNameCard() {
             const canvas = document.getElementById('nameCard');
             const ctx = canvas.getContext('2d');
             
-            canvas.width = 400;
-            canvas.height = 300;
-
-            // 랜덤 그라디언트 배경
-            const gradients = [
-                ['#667eea', '#764ba2'],
-                ['#f093fb', '#f5576c'],
-                ['#4facfe', '#00f2fe'],
-                ['#a8edea', '#fed6e3'],
-                ['#ffecd2', '#fcb69f'],
-                ['#43e97b', '#38f9d7']
-            ];
+            canvas.width = 350;
+            canvas.height = 250;
             
-            const gradient = gradients[Math.floor(Math.random() * gradients.length)];
-            const canvasGradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-            canvasGradient.addColorStop(0, gradient[0]);
-            canvasGradient.addColorStop(1, gradient[1]);
+            // Gradient background
+            const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+            gradient.addColorStop(0, '#667eea');
+            gradient.addColorStop(1, '#764ba2');
             
-            ctx.fillStyle = canvasGradient;
+            ctx.fillStyle = gradient;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            // 카드 영역
+            
+            // Card background
             ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
             ctx.beginPath();
-            ctx.roundRect(30, 50, canvas.width - 60, canvas.height - 100, 15);
+            roundRect(ctx, 25, 25, canvas.width - 50, canvas.height - 50, 15);
             ctx.fill();
-
-            // 원문 텍스트
+            
+            // "My name is John." 텍스트
             ctx.fillStyle = '#666666';
-            ctx.font = '16px Noto Sans KR';
+            ctx.font = '16px Inter';
             ctx.textAlign = 'center';
-            ctx.fillText(getOriginalText(), canvas.width / 2, 120);
-
-            // 한국어 이름
+            ctx.fillText(`My name is ${currentResult.originalName}.`, canvas.width / 2, 100);
+            
+            // "My Korean name is 존!" 텍스트 
             ctx.fillStyle = '#2d3748';
-            ctx.font = 'bold 24px Noto Sans KR';
-            ctx.fillText(getKoreanText(), canvas.width / 2, 170);
-
-            // 하단 장식
-            ctx.fillStyle = '#000000';
-            ctx.font = '14px Noto Sans KR';
-            ctx.fillText('✨ Name2Korean ✨', canvas.width / 2, 220);
+            ctx.font = 'bold 18px Noto Sans KR, Arial';
+            ctx.fillText(`My Korean name is ${currentResult.korean}!`, canvas.width / 2, 140);
+            
+            // Pronunciation
+            ctx.fillStyle = '#718096';
+            ctx.font = '14px Inter';
+            ctx.fillText(`[${currentResult.pronunciation}]`, canvas.width / 2, 170);
+            
+            // Footer
+            ctx.fillStyle = '#a0aec0';
+            ctx.font = '12px Inter';
+            ctx.fillText('Name2Korean', canvas.width / 2, 200);
         }
-
-        // 언어별 텍스트 템플릿
-        function getOriginalText() {
-            const templates = {
-                'en': `My name is ${currentOriginalName}.`,
-                'jp': `私の名前は${currentOriginalName}です。`,
-                'cn': `我叫${currentOriginalName}。`,
-                'es': `Mi nombre es ${currentOriginalName}.`,
-                'fr': `Je m'appelle ${currentOriginalName}.`
-            };
-            return templates[currentLanguage] || templates['en'];
+        
+        // Helper function for rounded rectangles
+        function roundRect(ctx, x, y, width, height, radius) {
+            ctx.beginPath();
+            ctx.moveTo(x + radius, y);
+            ctx.lineTo(x + width - radius, y);
+            ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+            ctx.lineTo(x + width, y + height - radius);
+            ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+            ctx.lineTo(x + radius, y + height);
+            ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+            ctx.lineTo(x, y + radius);
+            ctx.quadraticCurveTo(x, y, x + radius, y);
+            ctx.closePath();
         }
-
-        function getKoreanText() {
-            const templates = {
-                'en': `My Korean name is ${currentKoreanName}!`,
-                'jp': `私の韓国名は${currentKoreanName}です!`,
-                'cn': `我的韩文名字是${currentKoreanName}!`,
-                'es': `Mi nombre coreano es ${currentKoreanName}!`,
-                'fr': `Mon nom coréen est ${currentKoreanName}!`
-            };
-            return templates[currentLanguage] || templates['en'];
-        }
-
-        // 다운로드 함수
+        
+        // Download functionality
         function downloadCard() {
             const canvas = document.getElementById('nameCard');
             const link = document.createElement('a');
-            link.download = `korean-name-${currentKoreanName}.png`;
+            link.download = `korean-name-${currentResult.korean}.png`;
             link.href = canvas.toDataURL('image/png');
             link.click();
         }
-
-        // 공유 팝업 표시
-        function showSharePopup() {
-            const baseUrl = window.location.origin + window.location.pathname;
-            const shareUrl = `${baseUrl}?shared=${encodeURIComponent(currentOriginalName)}_${encodeURIComponent(currentKoreanName)}&lang=${currentLanguage}`;
+        
+        // Share functionality
+        function shareResult() {
+            const shareData = {
+                title: 'My Korean Name',
+                text: `My name ${currentResult.originalName} in Korean is ${currentResult.korean}!`,
+                url: window.location.href
+            };
             
-            document.getElementById('shareUrl').textContent = shareUrl;
-            document.getElementById('sharePopup').style.display = 'flex';
+            if (navigator.share) {
+                navigator.share(shareData);
+            } else {
+                // Fallback: copy to clipboard
+                const text = `My name ${currentResult.originalName} in Korean is ${currentResult.korean}! Check it out at ${window.location.href}`;
+                navigator.clipboard.writeText(text).then(() => {
+                    alert('Copied to clipboard! Share with your friends.');
+                }).catch(() => {
+                    alert('Share: ' + text);
+                });
+            }
         }
-
-        // 공유 팝업 숨기기
-        function hideSharePopup() {
-            document.getElementById('sharePopup').style.display = 'none';
-        }
-
-        // URL 복사
-        function copyShareUrl() {
-            const shareUrl = document.getElementById('shareUrl').textContent;
-            navigator.clipboard.writeText(shareUrl).then(() => {
-                alert('링크가 복사되었습니다! 친구들에게 공유해보세요 🎉');
-            }).catch(() => {
-                // 폴백: 텍스트 선택
-                const range = document.createRange();
-                range.selectNode(document.getElementById('shareUrl'));
-                window.getSelection().removeAllRanges();
-                window.getSelection().addRange(range);
-                alert('링크를 복사하세요!');
-            });
-        }
-
-        // Enter 키 이벤트
+        
+        // Event listeners
         document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('nameInput').addEventListener('keypress', function(e) {
+            const nameInput = document.getElementById('nameInput');
+            const convertBtn = document.getElementById('convertBtn');
+            
+            nameInput.addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') {
                     convertName();
                 }
             });
             
-            // 팝업 외부 클릭시 닫기
-            document.getElementById('sharePopup').addEventListener('click', function(e) {
-                if (e.target === this) {
-                    hideSharePopup();
+            nameInput.addEventListener('input', function() {
+                const hasInput = this.value.trim().length > 0;
+                convertBtn.disabled = !hasInput;
+            });
+            
+            // Real-time preview (optional)
+            let timeoutId;
+            nameInput.addEventListener('input', function() {
+                clearTimeout(timeoutId);
+                if (this.value.trim().length > 2) {
+                    timeoutId = setTimeout(() => {
+                        // Show preview or suggestions
+                    }, 500);
                 }
             });
         });
