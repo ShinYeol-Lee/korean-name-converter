@@ -1224,16 +1224,7 @@ function sendEmail() {
             ctx.quadraticCurveTo(x, y, x + radius, y);
             ctx.closePath();
         }
-        
-        // Download functionality
-        function downloadCard() {
-            const canvas = document.getElementById('nameCard');
-            const link = document.createElement('a');
-            link.download = `korean-name-${currentResult.korean}.png`;
-            link.href = canvas.toDataURL('image/png');
-            link.click();
-        }
-        
+                
         // Share functionality
         function shareResult() {
             const shareData = {
@@ -1285,6 +1276,7 @@ function sendEmail() {
     </script>
 </body>
 </html>
+
 
 
 
