@@ -759,7 +759,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Enhanced card drawing function
-// Enhanced card drawing function
 function drawNameCard() {
     const canvas = document.getElementById('nameCard');
     const ctx = canvas.getContext('2d');
@@ -788,24 +787,7 @@ function drawNameCard() {
         ctx.beginPath();
         roundRect(ctx, 30, 30, canvas.width - 60, canvas.height - 60, 20);
         ctx.fill();
-        
-        // Shadow effect
-        ctx.shadowColor = 'rgba(0, 0, 0, 0.1)';
-        ctx.shadowBlur = 10;
-        ctx.shadowOffsetX = 0;
-        ctx.shadowOffsetY = 5;
-    }
-    
-    // Reset shadow
-    ctx.shadowColor = 'transparent';
-    ctx.shadowBlur = 0;
-    ctx.shadowOffsetX = 0;
-    ctx.shadowOffsetY = 0;
-    
-    // Font settings
-    // 기본 폰트 사용
-    ctx.font = `bold 24px Noto Sans KR`;  // 또는 'Noto Sans KR'
-    
+           
     // Text color (adjust based on background)
     const textColor = selectedBackground === 'transparent' ? '#2d3748' : 
                      (selectedBackground === 'white' && isLightColor(document.getElementById('bgColor').value)) ? '#2d3748' : '#2d3748';
@@ -818,7 +800,7 @@ function drawNameCard() {
     
     // Korean name (large and emphasized)
     ctx.fillStyle = textColor;
-    ctx.font = `bold 24px ${fontFamily}`;
+    ctx.font = `bold 24px Noto Sans KR`;
     ctx.fillText(`My Korean name is ${currentResult.korean}.`, canvas.width / 2, 180);
     
    
@@ -1191,6 +1173,7 @@ function sendEmail() {
     </script>
 </body>
 </html>
+
 
 
 
