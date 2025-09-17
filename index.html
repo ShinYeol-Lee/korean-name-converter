@@ -1209,46 +1209,7 @@ function sendEmail() {
             
             variationsSection.style.display = 'block';
         }
-        
-        // Enhanced card drawing (원본 englishonly.html 스타일)
-        function drawNameCard() {
-            const canvas = document.getElementById('nameCard');
-            const ctx = canvas.getContext('2d');
-            
-            canvas.width = 350;
-            canvas.height = 250;
-            
-            // Gradient background
-            const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-            gradient.addColorStop(0, '#667eea');
-            gradient.addColorStop(1, '#764ba2');
-            
-            ctx.fillStyle = gradient;
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            // Card background
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
-            ctx.beginPath();
-            roundRect(ctx, 25, 25, canvas.width - 50, canvas.height - 50, 15);
-            ctx.fill();
-            
-            // "My name is John." 텍스트
-            ctx.fillStyle = '#666666';
-            ctx.font = '16px Inter';
-            ctx.textAlign = 'center';
-            ctx.fillText(`My name is ${currentResult.originalName}.`, canvas.width / 2, 100);
-            
-            // "My Korean name is 존!" 텍스트 
-            ctx.fillStyle = '#2d3748';
-            ctx.font = 'bold 18px Noto Sans KR, Arial';
-            ctx.fillText(`My Korean name is ${currentResult.korean}!`, canvas.width / 2, 140);
-                        
-            // Footer
-            ctx.fillStyle = '#a0aec0';
-            ctx.font = '12px Inter';
-            ctx.fillText('Name2Korean', canvas.width / 2, 200);
-        }
-        
+               
         // Helper function for rounded rectangles
         function roundRect(ctx, x, y, width, height, radius) {
             ctx.beginPath();
@@ -1324,6 +1285,7 @@ function sendEmail() {
     </script>
 </body>
 </html>
+
 
 
 
