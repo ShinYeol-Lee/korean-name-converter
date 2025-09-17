@@ -786,11 +786,8 @@ function drawNameCard() {
         ctx.beginPath();
         roundRect(ctx, 30, 30, canvas.width - 60, canvas.height - 60, 20);
         ctx.fill();
+    }
            
-    // Text color (adjust based on background)
-    const textColor = selectedBackground === 'transparent' ? '#2d3748' : 
-                     (selectedBackground === 'white' && isLightColor(document.getElementById('bgColor').value)) ? '#2d3748' : '#2d3748';
-    
     // "My name is John." text
     ctx.fillStyle = selectedBackground === 'transparent' ? '#555555' : '#666666';
     ctx.font = '18px Inter';
@@ -1170,6 +1167,7 @@ function sendEmail() {
     </script>
 </body>
 </html>
+
 
 
 
