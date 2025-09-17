@@ -710,32 +710,6 @@
         </div>
 
 <!-- Font Selection & Background Options (English) -->
-<div class="font-selection-section" style="margin-top: 30px; padding: 25px; background: #f8fafc; border-radius: 15px;">
-    <div class="font-selection-title" style="font-size: 1.1em; font-weight: 600; color: #2d3748; margin-bottom: 15px;">
-        🎨 Choose Font & Style
-    </div>
-    
-    <div class="font-options" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px;">
-        <div class="font-option" onclick="selectFont('noto')" data-font="noto" style="padding: 15px; background: white; border: 2px solid #e2e8f0; border-radius: 10px; cursor: pointer; text-align: center; transition: all 0.2s ease;">
-            <div style="font-family: 'Noto Sans KR', sans-serif; font-size: 20px; margin-bottom: 5px;">한글이름</div>
-            <div style="font-size: 14px; color: #666;">Noto Sans KR</div>
-        </div>
-        
-        <div class="font-option" onclick="selectFont('nanum')" data-font="nanum" style="padding: 15px; background: white; border: 2px solid #e2e8f0; border-radius: 10px; cursor: pointer; text-align: center; transition: all 0.2s ease;">
-            <div style="font-family: 'Nanum Gothic', sans-serif; font-size: 20px; margin-bottom: 5px;">한글이름</div>
-            <div style="font-size: 14px; color: #666;">Nanum Gothic</div>
-        </div>
-        
-        <div class="font-option" onclick="selectFont('cute')" data-font="cute" style="padding: 15px; background: white; border: 2px solid #e2e8f0; border-radius: 10px; cursor: pointer; text-align: center; transition: all 0.2s ease;">
-            <div style="font-family: 'Jua', cursive; font-size: 20px; margin-bottom: 5px;">한글이름</div>
-            <div style="font-size: 14px; color: #666;">Jua (Cute Style)</div>
-        </div>
-        
-        <div class="font-option" onclick="selectFont('elegant')" data-font="elegant" style="padding: 15px; background: white; border: 2px solid #e2e8f0; border-radius: 10px; cursor: pointer; text-align: center; transition: all 0.2s ease;">
-            <div style="font-family: 'Noto Serif KR', serif; font-size: 20px; margin-bottom: 5px;">한글이름</div>
-            <div style="font-size: 14px; color: #666;">Noto Serif (Elegant)</div>
-        </div>
-    </div>
     
     <div class="background-options" style="margin-top: 20px;">
         <div style="font-size: 1em; font-weight: 600; color: #2d3748; margin-bottom: 10px;">Background Options:</div>
@@ -759,45 +733,8 @@
 
 <script>
 // Font selection and background options (English version)
-let selectedFont = 'noto';
 let selectedBackground = 'gradient';
 
-// Load Google Fonts dynamically
-function loadGoogleFonts() {
-    const fonts = [
-        'Nanum+Gothic:400,700',
-        'Jua:400',
-        'Noto+Serif+KR:400,700'
-    ];
-    
-    fonts.forEach(font => {
-        const link = document.createElement('link');
-        link.href = `https://fonts.googleapis.com/css2?family=${font}&display=swap`;
-        link.rel = 'stylesheet';
-        document.head.appendChild(link);
-    });
-}
-
-// Font selection function
-function selectFont(fontType) {
-    selectedFont = fontType;
-    
-    // Reset all font options
-    document.querySelectorAll('.font-option').forEach(option => {
-        option.style.borderColor = '#e2e8f0';
-        option.style.background = 'white';
-    });
-    
-    // Highlight selected font option
-    const selectedOption = document.querySelector(`[data-font="${fontType}"]`);
-    selectedOption.style.borderColor = '#667eea';
-    selectedOption.style.background = '#f7fafc';
-    
-    // Redraw card
-    if (currentResult) {
-        drawNameCard();
-    }
-}
 
 // Initialize when page loads
 document.addEventListener('DOMContentLoaded', function() {
@@ -866,18 +803,8 @@ function drawNameCard() {
     ctx.shadowOffsetY = 0;
     
     // Font settings
-    let fontFamily = 'Noto Sans KR';
-    switch(selectedFont) {
-        case 'nanum':
-            fontFamily = 'Nanum Gothic';
-            break;
-        case 'cute':
-            fontFamily = 'Jua';
-            break;
-        case 'elegant':
-            fontFamily = 'Noto Serif KR';
-            break;
-    }
+    // 기본 폰트 사용
+    ctx.font = `bold 24px Noto Sans KR`;  // 또는 'Noto Sans KR'
     
     // Text color (adjust based on background)
     const textColor = selectedBackground === 'transparent' ? '#2d3748' : 
@@ -1264,6 +1191,7 @@ function sendEmail() {
     </script>
 </body>
 </html>
+
 
 
 
