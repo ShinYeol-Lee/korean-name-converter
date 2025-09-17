@@ -709,6 +709,257 @@
             </div>
         </div>
 
+<!-- Font Selection & Background Options (English) -->
+<div class="font-selection-section" style="margin-top: 30px; padding: 25px; background: #f8fafc; border-radius: 15px;">
+    <div class="font-selection-title" style="font-size: 1.1em; font-weight: 600; color: #2d3748; margin-bottom: 15px;">
+        🎨 Choose Font & Style
+    </div>
+    
+    <div class="font-options" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px;">
+        <div class="font-option" onclick="selectFont('noto')" data-font="noto" style="padding: 15px; background: white; border: 2px solid #e2e8f0; border-radius: 10px; cursor: pointer; text-align: center; transition: all 0.2s ease;">
+            <div style="font-family: 'Noto Sans KR', sans-serif; font-size: 20px; margin-bottom: 5px;">한글이름</div>
+            <div style="font-size: 14px; color: #666;">Noto Sans KR</div>
+        </div>
+        
+        <div class="font-option" onclick="selectFont('nanum')" data-font="nanum" style="padding: 15px; background: white; border: 2px solid #e2e8f0; border-radius: 10px; cursor: pointer; text-align: center; transition: all 0.2s ease;">
+            <div style="font-family: 'Nanum Gothic', sans-serif; font-size: 20px; margin-bottom: 5px;">한글이름</div>
+            <div style="font-size: 14px; color: #666;">Nanum Gothic</div>
+        </div>
+        
+        <div class="font-option" onclick="selectFont('cute')" data-font="cute" style="padding: 15px; background: white; border: 2px solid #e2e8f0; border-radius: 10px; cursor: pointer; text-align: center; transition: all 0.2s ease;">
+            <div style="font-family: 'Jua', cursive; font-size: 20px; margin-bottom: 5px;">한글이름</div>
+            <div style="font-size: 14px; color: #666;">Jua (Cute Style)</div>
+        </div>
+        
+        <div class="font-option" onclick="selectFont('elegant')" data-font="elegant" style="padding: 15px; background: white; border: 2px solid #e2e8f0; border-radius: 10px; cursor: pointer; text-align: center; transition: all 0.2s ease;">
+            <div style="font-family: 'Noto Serif KR', serif; font-size: 20px; margin-bottom: 5px;">한글이름</div>
+            <div style="font-size: 14px; color: #666;">Noto Serif (Elegant)</div>
+        </div>
+    </div>
+    
+    <div class="background-options" style="margin-top: 20px;">
+        <div style="font-size: 1em; font-weight: 600; color: #2d3748; margin-bottom: 10px;">Background Options:</div>
+        <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+            <label style="display: flex; align-items: center; cursor: pointer;">
+                <input type="radio" name="background" value="gradient" checked style="margin-right: 8px;">
+                <span>Gradient Background</span>
+            </label>
+            <label style="display: flex; align-items: center; cursor: pointer;">
+                <input type="radio" name="background" value="transparent" style="margin-right: 8px;">
+                <span>Transparent Background</span>
+            </label>
+            <label style="display: flex; align-items: center; cursor: pointer;">
+                <input type="radio" name="background" value="white" style="margin-right: 8px;">
+                <input type="color" value="#ffffff" id="bgColor" style="width: 20px; height: 20px; border: none; margin-right: 8px;">
+                <span>Custom Color</span>
+            </label>
+        </div>
+    </div>
+</div>
+
+<script>
+// Font selection and background options (English version)
+let selectedFont = 'noto';
+let selectedBackground = 'gradient';
+
+// Load Google Fonts dynamically
+function loadGoogleFonts() {
+    const fonts = [
+        'Nanum+Gothic:400,700',
+        'Jua:400',
+        'Noto+Serif+KR:400,700'
+    ];
+    
+    fonts.forEach(font => {
+        const link = document.createElement('link');
+        link.href = `https://fonts.googleapis.com/css2?family=${font}&display=swap`;
+        link.rel = 'stylesheet';
+        document.head.appendChild(link);
+    });
+}
+
+// Font selection function
+function selectFont(fontType) {
+    selectedFont = fontType;
+    
+    // Reset all font options
+    document.querySelectorAll('.font-option').forEach(option => {
+        option.style.borderColor = '#e2e8f0';
+        option.style.background = 'white';
+    });
+    
+    // Highlight selected font option
+    const selectedOption = document.querySelector(`[data-font="${fontType}"]`);
+    selectedOption.style.borderColor = '#667eea';
+    selectedOption.style.background = '#f7fafc';
+    
+    // Redraw card
+    if (currentResult) {
+        drawNameCard();
+    }
+}
+
+// Initialize when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    loadGoogleFonts();
+    
+    // Background option change listeners
+    document.querySelectorAll('input[name="background"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+            selectedBackground = this.value;
+            if (currentResult) {
+                drawNameCard();
+            }
+        });
+    });
+    
+    // Color picker change listener
+    document.getElementById('bgColor').addEventListener('change', function() {
+        if (document.querySelector('input[value="white"]').checked && currentResult) {
+            drawNameCard();
+        }
+    });
+});
+
+// Enhanced card drawing function
+function drawNameCard() {
+    const canvas = document.getElementById('nameCard');
+    const ctx = canvas.getContext('2d');
+    
+    canvas.width = 400;
+    canvas.height = 300;
+    
+    // Background settings
+    if (selectedBackground === 'transparent') {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    } else if (selectedBackground === 'gradient') {
+        const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+        gradient.addColorStop(0, '#667eea');
+        gradient.addColorStop(1, '#764ba2');
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    } else if (selectedBackground === 'white') {
+        const bgColor = document.getElementById('bgColor').value;
+        ctx.fillStyle = bgColor;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
+    
+    // Card background (only when not transparent)
+    if (selectedBackground !== 'transparent') {
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
+        ctx.beginPath();
+        roundRect(ctx, 30, 30, canvas.width - 60, canvas.height - 60, 20);
+        ctx.fill();
+        
+        // Shadow effect
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.1)';
+        ctx.shadowBlur = 10;
+        ctx.shadowOffsetX = 0;
+        ctx.shadowOffsetY = 5;
+    }
+    
+    // Reset shadow
+    ctx.shadowColor = 'transparent';
+    ctx.shadowBlur = 0;
+    ctx.shadowOffsetX = 0;
+    ctx.shadowOffsetY = 0;
+    
+    // Font settings
+    let fontFamily = 'Noto Sans KR';
+    switch(selectedFont) {
+        case 'nanum':
+            fontFamily = 'Nanum Gothic';
+            break;
+        case 'cute':
+            fontFamily = 'Jua';
+            break;
+        case 'elegant':
+            fontFamily = 'Noto Serif KR';
+            break;
+    }
+    
+    // Text color (adjust based on background)
+    const textColor = selectedBackground === 'transparent' ? '#2d3748' : 
+                     (selectedBackground === 'white' && isLightColor(document.getElementById('bgColor').value)) ? '#2d3748' : '#2d3748';
+    
+    // "My name is John." text
+    ctx.fillStyle = selectedBackground === 'transparent' ? '#555555' : '#666666';
+    ctx.font = '18px Inter';
+    ctx.textAlign = 'center';
+    ctx.fillText(`My name is ${currentResult.originalName}.`, canvas.width / 2, 120);
+    
+    // Korean name (large and emphasized)
+    ctx.fillStyle = textColor;
+    ctx.font = `bold 36px ${fontFamily}`;
+    ctx.fillText(currentResult.korean, canvas.width / 2, 170);
+    
+    // Pronunciation guide
+    ctx.fillStyle = selectedBackground === 'transparent' ? '#777777' : '#718096';
+    ctx.font = '16px Inter';
+    ctx.fillText(`[${currentResult.pronunciation}]`, canvas.width / 2, 200);
+    
+    // Logo/watermark
+    if (selectedBackground !== 'transparent') {
+        ctx.fillStyle = '#a0aec0';
+        ctx.font = '14px Inter';
+        ctx.fillText('Name2Korean', canvas.width / 2, 240);
+    }
+}
+
+// Check if color is light
+function isLightColor(color) {
+    const hex = color.replace('#', '');
+    const r = parseInt(hex.substr(0, 2), 16);
+    const g = parseInt(hex.substr(2, 2), 16);
+    const b = parseInt(hex.substr(4, 2), 16);
+    const brightness = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+    return brightness > 155;
+}
+
+// Updated download function with English notifications
+function downloadCard() {
+    const canvas = document.getElementById('nameCard');
+    const link = document.createElement('a');
+    
+    // Include font and background info in filename
+    const fontName = selectedFont;
+    const bgType = selectedBackground;
+    link.download = `korean-name-${currentResult.korean}-${fontName}-${bgType}.png`;
+    
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+    
+    // Download completion notification
+    setTimeout(() => {
+        alert('🎉 Your Korean name card has been downloaded!\nTransparent background images can be used over other images.');
+    }, 100);
+}
+</script>
+
+<style>
+.font-option:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.font-option.selected {
+    border-color: #667eea !important;
+    background: #f7fafc !important;
+}
+
+/* Enhanced radio button styling */
+input[type="radio"] {
+    width: 16px;
+    height: 16px;
+    accent-color: #667eea;
+}
+
+input[type="color"] {
+    border-radius: 4px;
+    cursor: pointer;
+}
+</style>
+        
 <!-- 여기에 추가 -->
 <!-- 영어 버전 문의 섹션 (이메일 난독화) -->
 <div class="support-section" style="text-align: center; margin: 30px 0; padding: 20px; background: rgba(248, 250, 252, 0.8); border-radius: 12px; border-left: 4px solid #667eea;">
@@ -1063,6 +1314,7 @@ function sendEmail() {
     </script>
 </body>
 </html>
+
 
 
 
