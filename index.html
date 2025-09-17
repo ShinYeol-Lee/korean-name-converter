@@ -827,11 +827,9 @@ function downloadCard() {
     const canvas = document.getElementById('nameCard');
     const link = document.createElement('a');
     
-    // Include font and background info in filename
-    const fontName = selectedFont;
-    const bgType = selectedBackground;
-    link.download = `korean-name-${currentResult.korean}-${fontName}-${bgType}.png`;
-    
+    // Simple filename without undefined variables
+    link.download = `korean-name-${currentResult.korean}-${selectedBackground}.png`;
+       
     link.href = canvas.toDataURL('image/png');
     link.click();
     
@@ -1173,6 +1171,7 @@ function sendEmail() {
     </script>
 </body>
 </html>
+
 
 
 
