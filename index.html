@@ -583,14 +583,34 @@
         </div>
 
 <!-- 여기에 추가 -->
+<!-- 영어 버전 문의 섹션 (이메일 난독화) -->
 <div class="support-section" style="text-align: center; margin: 30px 0; padding: 20px; background: rgba(248, 250, 252, 0.8); border-radius: 12px; border-left: 4px solid #667eea;">
     <p style="color: #4a5568; font-size: 0.95em; margin-bottom: 8px;">
-        🤔 문제가 있거나 질문이 있으신가요?
+        🤔 Have questions or need help?
     </p>
     <p style="color: #718096; font-size: 0.9em;">
-        📧 <a href="mailto:name2korean@gmail.com" style="color: #667eea; text-decoration: none; font-weight: 600;">name2korean@gmail.com</a>으로 메일을 보내주세요!
+        📧 <a href="javascript:void(0)" onclick="sendEmail()" style="color: #667eea; text-decoration: none; font-weight: 600; cursor: pointer;">Send us an email!</a>
     </p>
 </div>
+
+<script>
+// 이메일 난독화 함수
+function sendEmail() {
+    // 이메일 주소를 여러 부분으로 나누어 저장
+    const user = 'name2korean';
+    const domain = 'gmail';
+    const tld = 'com';
+    const subject = encodeURIComponent('Name2Korean Inquiry');
+    const body = encodeURIComponent('Hello!\n\nMy question:\n\n\nThank you!');
+    
+    // 이메일 주소 조합
+    const email = user + '@' + domain + '.' + tld;
+    const mailtoLink = `mailto:${email}?subject=${subject}&body=${body}`;
+    
+    // 이메일 클라이언트 열기
+    window.location.href = mailtoLink;
+}
+</script>
         
         <div class="footer">
             <p>🌟 Convert English names to beautiful Korean characters</p>
@@ -921,6 +941,7 @@
     </script>
 </body>
 </html>
+
 
 
 
