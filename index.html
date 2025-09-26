@@ -1100,18 +1100,32 @@ document.addEventListener('DOMContentLoaded', function() {
         let currentResult = null;
         
         // Main conversion function
-        function convertName() {
-            const input = document.getElementById('nameInput').value.trim();
-            if (!input) {
-                alert('Please enter a name!');
-                return;
-            }
-            
-            currentResult = converter.convert(input);
-            currentResult.originalName = input;
-            
-            showResult();
-        }
+    async function convertName() {
+    const input = document.getElementById('nameInput').value.trim();
+    const convertBtn = document.getElementById('convertBtn');
+    
+    if (!input) {
+        alert('Please enter a name!');
+        return;
+    }
+    
+    // 버튼 상태를 로딩으로 변경
+    convertBtn.disabled = true;
+    convertBtn.textContent = '🔄 Converting...';
+    
+    try {
+        currentResult = await converter.convert(input);
+        currentResult.originalName = input;
+        showResult();
+    } catch (error) {
+        console.error('Conversion failed:', error);
+        alert('Sorry, there was an error converting your name. Please try again.');
+    } finally {
+        // 버튼 상태 복원
+        convertBtn.disabled = false;
+        convertBtn.textContent = '🔄 Convert to Korean';
+    }
+}
         
         // Display results
         function showResult() {
@@ -1238,6 +1252,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </script>
 </body>
 </html>
+
 
 
 
