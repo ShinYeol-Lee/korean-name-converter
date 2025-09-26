@@ -1128,33 +1128,27 @@ document.addEventListener('DOMContentLoaded', function() {
 }
         
         // Display results
-        function showResult() {
-            const resultSection = document.getElementById('resultSection');
-            const koreanNameText = document.getElementById('koreanNameText');
-            const originalNameText = document.getElementById('originalNameText');
-            const pronunciationGuide = document.getElementById('pronunciationGuide');
-            
-            // Update text
-            koreanNameText.textContent = currentResult.korean;
-            originalNameText.textContent = `← ${currentResult.originalName}`;
-            pronunciationGuide.textContent = `Pronunciation: ${currentResult.pronunciation}`;
-            
-            // Show alternatives if available
-            if (currentResult.alternatives.length > 1) {
-                showVariations();
-            } else {
-                document.getElementById('variationsSection').style.display = 'none';
-            }
-            
-            // Draw card
-            drawNameCard();
-            
-            // Show result section with animation
-            resultSection.classList.remove('hidden');
-            setTimeout(() => {
-                resultSection.classList.add('show');
-            }, 100);
-        }
+    function showResult() {
+    const resultSection = document.getElementById('resultSection');
+    const koreanNameText = document.getElementById('koreanNameText');
+    const originalNameText = document.getElementById('originalNameText');
+    
+    koreanNameText.textContent = currentResult.korean;
+    originalNameText.textContent = `← ${currentResult.originalName}`;
+    
+    if (currentResult.alternatives.length > 1) {
+        showVariations();
+    } else {
+        document.getElementById('variationsSection').style.display = 'none';
+    }
+    
+    drawNameCard();
+    
+    resultSection.classList.remove('hidden');
+    setTimeout(() => {
+        resultSection.classList.add('show');
+    }, 100);
+}
         
         // Show alternative name variations
         function showVariations() {
@@ -1252,6 +1246,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </script>
 </body>
 </html>
+
 
 
 
