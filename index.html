@@ -906,123 +906,194 @@ function sendEmail() {
     </div>
 
     <script>
-        // Enhanced Korean name converter (완전한 englishonly.html 버전)
-        class EnhancedKoreanConverter {
-            constructor() {
-                this.initializeConverter();
-            }
-            
-            initializeConverter() {
-                // Comprehensive English name dictionary with multiple variations
-                this.nameDict = {
-                    // Male names
-                    'aaron': ['아론', '에런'], 'adam': ['아담'], 'adrian': ['아드리안', '에이드리언'],
-                    'alan': ['앨런', '알란'], 'albert': ['알버트'], 'alex': ['알렉스'], 
-                    'alexander': ['알렉산더'], 'andrew': ['앤드류'], 'anthony': ['앤서니'],
-                    'arthur': ['아서'], 'austin': ['오스틴'], 'benjamin': ['벤자민'],
-                    'brian': ['브라이언'], 'bruce': ['브루스'], 'bryan': ['브라이언'],
-                    'carl': ['칼'], 'charles': ['찰스'], 'chris': ['크리스'],
-                    'christopher': ['크리스토퍼'], 'craig': ['크레이그'], 'daniel': ['다니엘'],
-                    'david': ['데이비드'], 'dennis': ['데니스'], 'douglas': ['더글라스'],
-                    'edward': ['에드워드'], 'eric': ['에릭'], 'eugene': ['유진'],
-                    'frank': ['프랭크'], 'gary': ['게리'], 'george': ['조지'],
-                    'gerald': ['제럴드'], 'harold': ['해럴드'], 'henry': ['헨리'],
-                    'howard': ['하워드'], 'jack': ['잭'], 'james': ['제임스'],
-                    'jason': ['제이슨'], 'jeffrey': ['제프리'], 'jeremy': ['제레미'],
-                    'jerry': ['제리'], 'jesse': ['제시'], 'jimmy': ['지미'],
-                    'john': ['존'], 'jon': ['존'], 'jonathan': ['조나단'],
-                    'jordan': ['조던'], 'joseph': ['조셉'], 'joshua': ['조슈아'],
-                    'justin': ['저스틴'], 'keith': ['키스'], 'kenneth': ['케네스'],
-                    'kevin': ['케빈'], 'kyle': ['카일'], 'larry': ['래리'],
-                    'lawrence': ['로렌스'], 'louis': ['루이스'], 'mark': ['마크'],
-                    'martin': ['마틴'], 'matthew': ['매튜'], 'michael': ['마이클'],
-                    'nicholas': ['니콜라스'], 'patrick': ['패트릭'], 'paul': ['폴'],
-                    'peter': ['피터'], 'philip': ['필립'], 'raymond': ['레이먼드'],
-                    'richard': ['리처드'], 'robert': ['로버트'], 'ronald': ['로날드'],
-                    'ryan': ['라이언'], 'samuel': ['사무엘'], 'scott': ['스콧'],
-                    'sean': ['숀'], 'stephen': ['스티븐'], 'steven': ['스티븐'],
-                    'thomas': ['토마스'], 'timothy': ['티모시'], 'todd': ['토드'],
-                    'victor': ['빅터'], 'walter': ['월터'], 'william': ['윌리엄'],
-                    
-                    // Female names
-                    'amanda': ['아만다'], 'amy': ['에이미'], 'andrea': ['안드레아'],
-                    'angela': ['안젤라'], 'anna': ['안나'], 'ashley': ['애슐리'],
-                    'barbara': ['바바라'], 'betty': ['베티'], 'brenda': ['브렌다'],
-                    'carol': ['캐롤'], 'carolyn': ['캐롤린'], 'catherine': ['캐서린'],
-                    'cheryl': ['셰릴'], 'christina': ['크리스티나'], 'christine': ['크리스틴'],
-                    'cynthia': ['신시아'], 'deborah': ['데보라'], 'diana': ['다이애나'],
-                    'donna': ['도나'], 'dorothy': ['도로시'], 'elizabeth': ['엘리자베스'],
-                    'emily': ['에밀리'], 'emma': ['에마'], 'helen': ['헬렌'],
-                    'jacqueline': ['재클린'], 'jane': ['제인'], 'janet': ['자넷'],
-                    'jennifer': ['제니퍼'], 'jessica': ['제시카'], 'joan': ['조안'],
-                    'judith': ['주디스'], 'judy': ['주디'], 'julia': ['줄리아'],
-                    'julie': ['줄리'], 'karen': ['카렌'], 'katherine': ['캐서린'],
-                    'kathy': ['캐시'], 'kelly': ['켈리'], 'kimberly': ['킴벌리'],
-                    'laura': ['로라'], 'linda': ['린다'], 'lisa': ['리사'],
-                    'lori': ['로리'], 'margaret': ['마가렛'], 'maria': ['마리아'],
-                    'marie': ['마리'], 'marilyn': ['마릴린'], 'martha': ['마사'],
-                    'mary': ['메리'], 'melissa': ['멜리사'], 'michelle': ['미셸'],
-                    'nancy': ['낸시'], 'nicole': ['니콜'], 'pamela': ['파멜라'],
-                    'patricia': ['패트리샤'], 'rebecca': ['레베카'], 'ruth': ['루스'],
-                    'sandra': ['산드라'], 'sarah': ['사라'], 'sharon': ['샤론'],
-                    'stephanie': ['스테파니'], 'susan': ['수잔'], 'teresa': ['테레사'],
-                    'theresa': ['테레사'], 'virginia': ['버지니아'], 'wendy': ['웬디']
-                };
-                
-                // Pronunciation patterns
-                this.pronunciationGuide = {
-                    'aaron': 'AH-ron', 'adam': 'AD-am', 'alex': 'AL-ex',
-                    'brian': 'BRY-an', 'david': 'DAY-vid', 'emily': 'EM-i-lee',
-                    'john': 'JOHN', 'sarah': 'SAIR-ah', 'michael': 'MY-kel',
-                    'emma': 'EM-ah', 'jessica': 'JES-i-ka', 'christopher': 'KRIS-to-fer',
-                    'jennifer': 'JEN-i-fer'
-                };
-            }
-            
-            convert(name) {
-                const cleanName = name.toLowerCase().trim();
-                
-                if (this.nameDict[cleanName]) {
-                    return {
-                        korean: this.nameDict[cleanName][0],
-                        alternatives: this.nameDict[cleanName],
-                        pronunciation: this.pronunciationGuide[cleanName] || this.generatePronunciation(name),
-                        confidence: 'high'
-                    };
-                }
-                
-                // Fallback to phonetic conversion
-                const phoneticResult = this.phoneticConvert(cleanName);
-                return {
-                    korean: phoneticResult,
-                    alternatives: [phoneticResult],
-                    pronunciation: this.generatePronunciation(name),
-                    confidence: 'medium'
-                };
-            }
-            
-            phoneticConvert(name) {
-                // Simplified phonetic conversion for unknown names
-                const vowelMap = { 'a': '아', 'e': '에', 'i': '이', 'o': '오', 'u': '우' };
-                const consonantMap = { 
-                    'b': 'ㅂ', 'c': 'ㅋ', 'd': 'ㄷ', 'f': 'ㅍ', 'g': 'ㄱ',
-                    'h': 'ㅎ', 'j': 'ㅈ', 'k': 'ㅋ', 'l': 'ㄹ', 'm': 'ㅁ',
-                    'n': 'ㄴ', 'p': 'ㅍ', 'r': 'ㄹ', 's': 'ㅅ', 't': 'ㅌ',
-                    'v': 'ㅂ', 'w': '우', 'x': 'ㅅ', 'y': '이', 'z': 'ㅈ'
-                };
-                
-                return name.split('').map(char => {
-                    if (vowelMap[char]) return vowelMap[char];
-                    if (consonantMap[char]) return consonantMap[char];
-                    return char;
-                }).join('');
-            }
-            
-            generatePronunciation(name) {
-                // Simple pronunciation guide generator
-                return name.toUpperCase().split('').join('-');
-            }
+        // Enhanced Korean name converter (외부 JSON 파일 사용 버전)
+class EnhancedKoreanConverter {
+    constructor() {
+        this.nameData = null;
+        this.isLoading = false;
+        this.isLoaded = false;
+        this.initializeConverter();
+    }
+    
+    async initializeConverter() {
+        try {
+            this.isLoading = true;
+            await this.loadNamesData();
+            this.isLoaded = true;
+        } catch (error) {
+            console.error('Failed to load names data:', error);
+            // 기본 이름들로 fallback
+            this.loadFallbackNames();
+            this.isLoaded = true;
+        } finally {
+            this.isLoading = false;
         }
+    }
+    
+    async loadNamesData() {
+        // JSON 파일 로드
+        const response = await fetch('names-data.json');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        this.nameData = data.names;
+    }
+    
+    loadFallbackNames() {
+        // 인터넷 연결이 없거나 JSON 로드 실패 시 기본 이름들
+        this.nameData = {
+            'john': ['존'],
+            'sarah': ['사라'],
+            'michael': ['마이클'],
+            'emma': ['에마'],
+            'david': ['데이비드'],
+            'jessica': ['제시카'],
+            'christopher': ['크리스토퍼'],
+            'jennifer': ['제니퍼'],
+            'james': ['제임스'],
+            'amy': ['에이미']
+        };
+    }
+    
+    async convert(name) {
+        // 데이터 로딩 완료까지 대기
+        if (this.isLoading) {
+            await this.waitForLoad();
+        }
+        
+        const cleanName = name.toLowerCase().trim();
+        
+        if (this.nameData && this.nameData[cleanName]) {
+            const koreanNames = this.nameData[cleanName];
+            return {
+                korean: koreanNames[0],
+                alternatives: koreanNames,
+                confidence: 'high'
+            };
+        }
+        
+        // Fallback to phonetic conversion
+        const phoneticResult = this.phoneticConvert(cleanName);
+        return {
+            korean: phoneticResult,
+            alternatives: [phoneticResult],
+            confidence: 'medium'
+        };
+    }
+    
+    async waitForLoad() {
+        // 로딩이 완료될 때까지 대기
+        while (this.isLoading) {
+            await new Promise(resolve => setTimeout(resolve, 100));
+        }
+    }
+    
+    phoneticConvert(name) {
+        // 기존 음성 변환 로직 유지
+        const vowelMap = { 'a': '아', 'e': '에', 'i': '이', 'o': '오', 'u': '우' };
+        const consonantMap = { 
+            'b': 'ㅂ', 'c': 'ㅋ', 'd': 'ㄷ', 'f': 'ㅍ', 'g': 'ㄱ',
+            'h': 'ㅎ', 'j': 'ㅈ', 'k': 'ㅋ', 'l': 'ㄹ', 'm': 'ㅁ',
+            'n': 'ㄴ', 'p': 'ㅍ', 'r': 'ㄹ', 's': 'ㅅ', 't': 'ㅌ',
+            'v': 'ㅂ', 'w': '우', 'x': 'ㅅ', 'y': '이', 'z': 'ㅈ'
+        };
+        
+        return name.split('').map(char => {
+            if (vowelMap[char]) return vowelMap[char];
+            if (consonantMap[char]) return consonantMap[char];
+            return char;
+        }).join('');
+    }
+}
+
+// Global variables
+let converter = new EnhancedKoreanConverter();
+let currentResult = null;
+
+// 수정된 변환 함수 (비동기 처리)
+async function convertName() {
+    const input = document.getElementById('nameInput').value.trim();
+    const convertBtn = document.getElementById('convertBtn');
+    
+    if (!input) {
+        alert('Please enter a name!');
+        return;
+    }
+    
+    // 버튼 상태를 로딩으로 변경
+    convertBtn.disabled = true;
+    convertBtn.textContent = '🔄 Converting...';
+    
+    try {
+        currentResult = await converter.convert(input);
+        currentResult.originalName = input;
+        showResult();
+    } catch (error) {
+        console.error('Conversion failed:', error);
+        alert('Sorry, there was an error converting your name. Please try again.');
+    } finally {
+        // 버튼 상태 복원
+        convertBtn.disabled = false;
+        convertBtn.textContent = '🔄 Convert to Korean';
+    }
+}
+
+// 나머지 함수들은 기존과 동일...
+function showResult() {
+    const resultSection = document.getElementById('resultSection');
+    const koreanNameText = document.getElementById('koreanNameText');
+    const originalNameText = document.getElementById('originalNameText');
+    
+    koreanNameText.textContent = currentResult.korean;
+    originalNameText.textContent = `← ${currentResult.originalName}`;
+    
+    if (currentResult.alternatives.length > 1) {
+        showVariations();
+    } else {
+        document.getElementById('variationsSection').style.display = 'none';
+    }
+    
+    drawNameCard();
+    
+    resultSection.classList.remove('hidden');
+    setTimeout(() => {
+        resultSection.classList.add('show');
+    }, 100);
+}
+
+// 페이지 로드 시 상태 표시 추가
+document.addEventListener('DOMContentLoaded', function() {
+    const nameInput = document.getElementById('nameInput');
+    const convertBtn = document.getElementById('convertBtn');
+    
+    // 초기 상태: 로딩 중
+    convertBtn.textContent = '🔄 Loading names...';
+    convertBtn.disabled = true;
+    
+    // 변환기 로딩 완료 확인
+    const checkLoaded = setInterval(() => {
+        if (converter.isLoaded) {
+            convertBtn.textContent = '🔄 Convert to Korean';
+            convertBtn.disabled = false;
+            clearInterval(checkLoaded);
+        }
+    }, 100);
+    
+    // 기존 이벤트 리스너들
+    nameInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter' && !convertBtn.disabled) {
+            convertName();
+        }
+    });
+    
+    nameInput.addEventListener('input', function() {
+        if (converter.isLoaded) {
+            const hasInput = this.value.trim().length > 0;
+            convertBtn.disabled = !hasInput;
+        }
+    });
+});
         
         // Global variables
         let converter = new EnhancedKoreanConverter();
@@ -1167,6 +1238,7 @@ function sendEmail() {
     </script>
 </body>
 </html>
+
 
 
 
