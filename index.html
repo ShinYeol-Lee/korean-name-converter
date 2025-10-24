@@ -903,9 +903,12 @@
             ctx.textAlign = 'center';
             ctx.fillText(`My name is ${currentResult.originalName}.`, canvas.width / 2, 120);
             
-            // 한국어 이름 (크고 강조)
+           // 한국어 이름 (글자 수에 따라 크기 조정)
+            const koreanLength = currentResult.korean.length;
+            const fontSize = koreanLength >= 5 ? 20 : 24;
+
             ctx.fillStyle = '#2d3748';
-            ctx.font = `bold 24px Noto Sans KR`;
+            ctx.font = `bold ${fontSize}px Noto Sans KR`;
             ctx.fillText(`My Korean name is ${currentResult.korean}.`, canvas.width / 2, 180);
             
             // 로고/워터마크
@@ -1046,4 +1049,5 @@
     </script>
 </body>
 </html>
+
 
